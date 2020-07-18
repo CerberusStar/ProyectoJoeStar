@@ -1,0 +1,72 @@
+from ClaseAMPL import SolverWithAMPL
+import os
+
+
+class Control:
+    def __init__(self, urlCarpetaCodigo, urlCarpetaData):
+        self.urlCarpetaCodigo = urlCarpetaCodigo
+        self.urlCarpetaData = urlCarpetaData
+
+    def createArchive(self, filename, listVariables, listPrices, listRestrictions):
+        # Creación de ambos ".txt"
+        filenameComplete = filename + ".txt"
+        rutacompletaCodigo = self.urlCarpetaCodigo + filenameComplete
+        rutacompletaData = self.urlCarpetaData + filenameComplete
+
+        # ".txt" donde se va a guardar la data (ARCHIVO VACIO)
+        file = open(rutacompletaData, "w")
+        file.close()
+
+        # ".txt" donde se va a guardar el código
+        file = open(rutacompletaCodigo, "w")
+
+        # Empezar a escribir el código de AMPL
+        # Escribir las variables
+        for var in listVariables:
+            file.write(f"var {var} integer >= 0;" + os.linesep)
+
+        # Escribir la Función a optimizar
+        # Unir las dos listas de datos principales en un String
+        position = 0
+        Funcion = ""
+        for var in listVariables:
+            variable = str(var)
+            precio = str(listPrices[position])
+            position += 1
+            Funcion += precio + "*" + variable + " + "
+        FuncionArreglada = Funcion.rstrip(" + ;")
+        # Escribe en el ".txt" la Función a optimizar
+        file.write(f"minimize cost: {FuncionArreglada};" + os.linesep)
+
+        # Escribir las restricciones
+        numeroRestriccion = 1
+        for restriccion in listRestrictions:
+            file.write(
+                f"subject to Restriccion{numeroRestriccion}: {restriccion};"
+                + os.linesep
+            )
+            numeroRestriccion += 1
+
+        # Escribir los displays para guardar la data en otro archivo
+        # Escribir el comando 'solve' para que AMPL trabaje la data
+        file.write(
+            f'option solver "C:\\Users\\Abel_\\Desktop\\amplide.mswin64\\gurobi.exe";'
+            + os.linesep
+        )
+        file.write(f"solve;" + os.linesep)
+        # Guardar los datos mediante displays (Código AMPL)
+        StringVariables = ""
+        for var in listVariables:
+            StringVariables += str(var) + ","
+        StringVariablesFixed = StringVariables.rstrip(",")
+        # Escribir el comando y especificarle donde guardar los archivos
+        file.write(f"display {StringVariablesFixed} > {rutacompletaData};")
+
+        # Cerrar el archivo
+        file.close()
+
+        # Correr el archivo en AMPL
+        # Inicializar AMPL dandole la url del programa
+        test = SolverWithAMPL("C:\\Users\\Abel_\\Desktop\\amplide.mswin64\\ampl.exe")
+        # Ejecutar el código que acabo de crear
+        test.ejecutarCodigo(rutacompletaCodigo)
