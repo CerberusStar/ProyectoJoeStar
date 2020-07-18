@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>AmplForm</title>
+{% endblock head %}
+
+{% block content %}
+<form action="/ampl" method="POST">
+
+    {% for i in number %}
+    Variable {{i}}:
+    <input type="text" name="variable{{i}}" id="variable{{i}}">
+    <br>
+    Precio {{i}}:
+    <input type="text" name="precio{{i}}" id="precio{{i}}">
+    <br><br>
+    {% endfor %}
+
+    RESTRICCIONES: <br><br>
+    {% for j in restriccion %}
+    Restricción {{j}}:
+    <input type="text" name="restriction{{j}}" id="restriction{{j}}">
+    <br><br>
+    {% endfor %}
+
+    <input type="submit" value="Log in">
+</form>
+{% endblock content %}
