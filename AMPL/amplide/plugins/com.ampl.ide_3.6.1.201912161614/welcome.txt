@@ -1,0 +1,5 @@
+Welcome to AMPL IDE!
+
+To get started, select Help Contents from the Help menu.
+ 
+To close this window, click on the x on the tab above.

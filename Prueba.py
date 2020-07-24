@@ -1,12 +1,11 @@
 from Controladora import Control
+import os
 
+# Esta ruta
 # CodigosAMPL
-Carpeta = "C:\\Users\\Abel_\\Desktop\\Personas\\"
-Archivo = "PruebaDeAMPLTupla"
+Archivo = "AbelCardenas"
 
 # DataConseguida
-CarpetaDest = "C:\\Users\\Abel_\\Desktop\\PersonInfo\\"
-
 listaVariables = ["Hamburguesa", "Pupusas", "Carne", "LibraDeArroz"]
 listaPrecios = [2.5, 3, 2.65, 3.25]
 listaRestricciones = [
@@ -15,5 +14,5 @@ listaRestricciones = [
     "0.4*Pupusas+0.5*Carne>=7",
 ]
 
-Ui = Control(Carpeta, CarpetaDest)
+Ui = Control()
 Ui.createArchive(Archivo, listaVariables, listaPrecios, listaRestricciones)
