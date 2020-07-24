@@ -3,9 +3,9 @@ import os
 
 
 class Control:
-    def __init__(self, urlCarpetaCodigo, urlCarpetaData):
-        self.urlCarpetaCodigo = urlCarpetaCodigo
-        self.urlCarpetaData = urlCarpetaData
+    def __init__(self):
+        self.urlCarpetaCodigo = os.getcwd() + "\\codigosAMPL\\"
+        self.urlCarpetaData = os.getcwd() + "\\datosAMPL\\"
 
     def createArchive(self, filename, listVariables, listPrices, listRestrictions):
         # Creación de ambos ".txt"
@@ -49,10 +49,9 @@ class Control:
 
         # Escribir los displays para guardar la data en otro archivo
         # Escribir el comando 'solve' para que AMPL trabaje la data
-        file.write(
-            f'option solver "C:\\Users\\Abel_\\Desktop\\amplide.mswin64\\gurobi.exe";'
-            + os.linesep
-        )
+        RutaSolverGurobi = os.getcwd() + "\\AMPL\\gurobi.exe"
+        print(RutaSolverGurobi)
+        file.write(f'option solver "{RutaSolverGurobi}";' + os.linesep)
         file.write(f"solve;" + os.linesep)
         # Guardar los datos mediante displays (Código AMPL)
         StringVariables = ""
@@ -67,6 +66,7 @@ class Control:
 
         # Correr el archivo en AMPL
         # Inicializar AMPL dandole la url del programa
-        test = SolverWithAMPL("C:\\Users\\Abel_\\Desktop\\amplide.mswin64\\ampl.exe")
+        RutaAMPL = os.getcwd() + "\\AMPL\\ampl.exe"
+        test = SolverWithAMPL(RutaAMPL)
         # Ejecutar el código que acabo de crear
         test.ejecutarCodigo(rutacompletaCodigo)

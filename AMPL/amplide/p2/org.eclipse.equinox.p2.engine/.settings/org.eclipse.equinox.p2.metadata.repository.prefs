@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/description=
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/enabled=true
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/isSystem=false
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/name=module-metadata-repository@C\:\\buildslave\\amplide-win64\\build\\com.ampl.ide.repository\\target
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/provider=
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/suffix=p2content.xml
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/type=org.eclipse.tycho.repository.module.ModuleMetadataRepository
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/uri=file\:/C\:/buildslave/amplide-win64/build/com.ampl.ide.repository/target/
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target/version=1.0.0
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target_targetPlatformRepository/enabled=true
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target_targetPlatformRepository/isSystem=false
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target_targetPlatformRepository/name=TychoTargetPlatform
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target_targetPlatformRepository/suffix=content.xml
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target_targetPlatformRepository/type=org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target_targetPlatformRepository/uri=file\:/C\:/buildslave/amplide-win64/build/com.ampl.ide.repository/target/targetPlatformRepository/
+repositories/file\:_C\:_buildslave_amplide-win64_build_com.ampl.ide.repository_target_targetPlatformRepository/version=0.0.1
