@@ -1,0 +1,1 @@
+Aquí se guardan los resultados de la optimización de la dieta del usuario
