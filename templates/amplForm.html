@@ -5,24 +5,24 @@
 {% endblock head %}
 
 {% block content %}
-<form action="/ampl" method="POST">
+<form action="/trainer/ampl" method="POST">
 
-    {% for i in number %}
-    Variable {{i}}:
+    {% for i in range(var) %}
+    Variable {{i+1}}:
     <input type="text" name="variable{{i}}" id="variable{{i}}">
     <br>
-    Precio {{i}}:
+    Precio {{i+1}}:
     <input type="text" name="precio{{i}}" id="precio{{i}}">
     <br><br>
     {% endfor %}
 
     RESTRICCIONES: <br><br>
-    {% for j in restriccion %}
-    Restricción {{j}}:
+    {% for j in range(restriccion) %}
+    Restricción {{j+1}}:
     <input type="text" name="restriction{{j}}" id="restriction{{j}}">
     <br><br>
     {% endfor %}
 
-    <input type="submit" value="Log in">
+    <input type="submit" value="RUN">
 </form>
 {% endblock content %}
