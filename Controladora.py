@@ -1,5 +1,6 @@
 from ClaseAMPL import SolverWithAMPL
 import os
+import time
 
 
 class Control:
@@ -70,3 +71,25 @@ class Control:
         test = SolverWithAMPL(RutaAMPL)
         # Ejecutar el código que acabo de crear
         test.ejecutarCodigo(rutacompletaCodigo)
+        return None
+
+    def controlDeError(self, filename):
+        filenameComplete = filename + ".txt"
+        rutacompletaData = self.urlCarpetaData + filenameComplete
+        time.sleep(5.5)
+        archivo = open(f"{rutacompletaData}", "r")
+        data = archivo.read()
+        if data != "":
+            archivo.close()
+            return 1
+        else:
+            archivo.close()
+            return 0
+
+    def borrarArchivo(self, filename):
+        filenameComplete = filename + ".txt"
+        rutacompletaCodigo = self.urlCarpetaCodigo + filenameComplete
+        rutacompletaData = self.urlCarpetaData + filenameComplete
+        os.remove(rutacompletaCodigo)
+        os.remove(rutacompletaData)
+        return None

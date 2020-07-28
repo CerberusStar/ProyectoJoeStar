@@ -52,17 +52,22 @@ def ampl():
             listaVariables.append(variable)
             listaPrecios.append(precio)
 
-        print(listaVariables)
-
         for j in range(restriccion):
             restriccion = request.form[f"restriction{j}"]
             listaRestricciones.append(restriccion)
-        print(listaRestricciones)
 
         codigoampl.createArchive(
             session["name"], listaVariables, listaPrecios, listaRestricciones
         )
-        return redirect("/")
+        # Control de errores, ya que si hay algún error siempre se crean los archivos, pero se escriben sobre ellos
+        # Un control de errores puede leer el archivo y sí está vacío algo salió mal
+        nombre = session["name"]
+        booleano = codigoampl.controlDeError(nombre)
+        if booleano == 1:
+            return render_template("exito.html")
+        else:
+            codigoampl.borrarArchivo(session["name"])
+            return render_template("error.html")
 
 
 if __name__ == "__main__":
