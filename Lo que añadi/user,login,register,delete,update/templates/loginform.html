@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loginform</title>
+</head>
+
+<body>
+    <h1>Login form</h1>
+    <br>
+
+    <p style="color: red;">{{message}}</p>
+    <form action="/inicio/loginform" method="POST">
+        Usuario: <br>
+        <input type="text" name="usuario" id="usuario">
+        <br><br>
+        Contraseña: <br>
+        <input type="password" name="password" id="password">
+        <br><br>
+        <input type="submit" value="Ingresar">
+        <a href="/inicio"><input type="button" value="Cancelar"></a>
+    </form>
+
+
+
+</body>
+
+</html>
