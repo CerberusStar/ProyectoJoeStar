@@ -3,6 +3,8 @@ from Controladora import Control
 from MethodUtil import MethodUtil
 from userlogic import UserLogic
 from userobj import UserObj
+from trainerlogic import TrainerLogic
+from trainerobj import TrainerObj
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -16,6 +18,10 @@ def index():
     return render_template("index.html")
 
 
+# PARA EL USUARIO NORMAL
+# -------------------------------------------------------------
+# -------------------------------------------------------------
+# -------------------------------------------------------------
 @app.route("/inicio", methods=MethodUtil.list_ALL())
 def inicio():
     if request.method == "GET":
@@ -164,9 +170,147 @@ def updateUser():
         return redirect(url_for("inicio"))
 
 
-@app.route("/trainer")
-def trainer():
-    return render_template("trainer.html")
+# -------------------------------------------------------------
+# -------------------------------------------------------------
+# -------------------------------------------------------------
+# PARA EL TRAINER
+# -------------------------------------------------------------
+# -------------------------------------------------------------
+# -------------------------------------------------------------
+
+
+@app.route("/trainer", methods=MethodUtil.list_ALL())
+def inicioTrainer():
+    if request.method == "GET":
+        return render_template("inicioTrainer.html")
+
+
+@app.route("/trainer/loginform", methods=MethodUtil.list_ALL())
+def loginformTrainer():
+    if request.method == "GET":
+        return render_template("loginformTrainer.html", message="")
+    if request.method == "POST":
+        usuario = request.form["usuario"]
+        password = request.form["password"]
+        logic = TrainerLogic()
+        userdata = logic.getTrainerData(usuario)
+        if userdata is not None:
+            session["usernameTrainer"] = userdata.username
+            if userdata.password == password:
+                return redirect(url_for("iniciarsesionTrainer"))
+            else:
+                return render_template(
+                    "loginformTrainer.html",
+                    message="el usuario o la contraseña está incorrecto, intentelo de nuevo",
+                )
+        else:
+            return render_template(
+                "loginformTrainer.html",
+                message="el usuario o la contraseña está incorrecto, intentelo de nuevo",
+            )
+
+
+@app.route("/trainer/registerform", methods=MethodUtil.list_ALL())
+def registerformTrainer():
+    if request.method == "GET":
+        return render_template("registerformTrainer.html",)
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        apellido = request.form["apellido"]
+        usuario = request.form["usuario"]
+        password = request.form["password"]
+        email = request.form["email"]
+        descripcion = request.form["descripcion"]
+        logic = TrainerLogic()
+        confirmation = logic.insertTrainer(
+            nombre, apellido, usuario, password, descripcion, email
+        )
+        if confirmation is True:
+            session["usernameTrainer"] = usuario
+            return redirect(url_for("iniciarsesionTrainer"))
+        else:
+            return "hay un problema"
+
+
+@app.route("/trainer/sesion", methods=MethodUtil.list_ALL())
+def iniciarsesionTrainer():
+    if "usernameTrainer" in session:
+        return render_template(
+            "dashboard_trainer.html", userdata=session["usernameTrainer"]
+        )
+    else:
+        return redirect(url_for("inicioTrainer"))
+
+
+@app.route("/trainer/session/borrar", methods=MethodUtil.list_ALL())
+def borrarTrainer():
+    if "usernameTrainer" in session:
+        logic = TrainerLogic()
+        confirmation = logic.deleteTrainer(session["usernameTrainer"])
+        if confirmation is True:
+            return redirect(url_for("salirTrainer"))
+    else:
+        return redirect(url_for("inicioTrainer"))
+
+
+@app.route("/trainer/session/salir", methods=MethodUtil.list_ALL())
+def salirTrainer():
+    if "usernameTrainer" in session:
+        session.pop("usernameTrainer", None)
+        return redirect(url_for("inicioTrainer"))
+    else:
+        return redirect(url_for("inicioTrainer"))
+
+
+@app.route("/trainer/session/update", methods=MethodUtil.list_ALL())
+def updateUserTrainer():
+    if "usernameTrainer" in session:
+        if request.method == "GET":
+            logic = TrainerLogic()
+            data = logic.getTrainerData(session["usernameTrainer"])
+            if data is not None:
+                id = data.id
+                nombre = data.firstname
+                apellido = data.lastname
+                usuario = data.username
+                password = data.password
+                description = data.description
+                email = data.email
+                session["id_trainer"] = id
+
+            return render_template(
+                "update_Trainer.html",
+                nombre1=nombre,
+                apellido1=apellido,
+                usuario1=usuario,
+                password1=password,
+                descripcion1=description,
+                email1=email,
+            )
+        else:
+            nombre = request.form["nombre"]
+            apellido = request.form["apellido"]
+            usuario = request.form["usuario"]
+            password = request.form["password"]
+            description = request.form["descripcion"]
+            email = request.form["email"]
+            logic = TrainerLogic()
+            confirmation = logic.updateTrainer(
+                session["id_trainer"],
+                nombre,
+                apellido,
+                usuario,
+                password,
+                description,
+                email,
+            )
+
+            if confirmation is True:
+                session.pop("usernameTrainer", None)
+                session["usernameTrainer"] = usuario
+                return redirect(url_for("iniciarsesionTrainer"))
+    else:
+        return redirect(url_for("inicioTrainer"))
 
 
 @app.route("/trainer/beforeAmpl", methods=["POST"])

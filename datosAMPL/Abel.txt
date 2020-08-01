@@ -1,5 +1,0 @@
-Sandia = 6
-Mango = 2
-Guineo = 0
-Aguacate = 0
-

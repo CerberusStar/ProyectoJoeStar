@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Register form Trainer</h1>
+    <br>
+
+
+    <p style="color: red;">{{message}}</p>
+    <form action="/trainer/registerform" method="POST">
+        Nombre: <br>
+        <input type="text" name="nombre" id="nombre">
+        <br><br>
+        Apellido: <br>
+        <input type="text" name="apellido" id="apellido">
+        <br><br>
+        Usuario: <br>
+        <input type="text" name="usuario" id="usuario">
+        <br><br>
+        Contraseña: <br>
+        <input type="password" name="password" id="password">
+        <br><br>
+        Descripcion: <br>
+        <input type="text" name="descripcion" id="descripcion">
+        <br><br>
+        Email: <br>
+        <input type="email" name="email" id="email">
+        <br><br>
+        <input type="submit" value="Crear Trainer">
+        <a href="/trainer"><input type="button" value="Cancelar"></a>
+    </form>
+</body>
+
+</html>
