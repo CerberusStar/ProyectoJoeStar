@@ -1,0 +1,10 @@
+var Sandia integer >= 0;
+var Mango integer >= 0;
+var Guineo integer >= 0;
+var Aguacate integer >= 0;
+minimize cost: 1*Sandia + 1.2*Mango + 1.3*Guineo + 1.25*Aguacate;
+subject to Restriccion1: Mango = 2;
+subject to Restriccion2: Sandia + Guineo + Aguacate >= 6;
+option solver "C:\Proyecto\ProyectoJoeStar\AMPL\gurobi.exe";
+solve;
+display Sandia,Mango,Guineo,Aguacate > C:\Proyecto\ProyectoJoeStar\datosAMPL\Abel.txt;
