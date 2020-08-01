@@ -9,17 +9,17 @@
 
     {% for i in range(var) %}
     Variable {{i+1}}:
-    <input type="text" name="variable{{i}}" id="variable{{i}}">
+    <input type="text" name="variable{{i}}" id="variable{{i}}" required>
     <br>
     Precio {{i+1}}:
-    <input type="text" name="precio{{i}}" id="precio{{i}}">
+    <input type="text" name="precio{{i}}" id="precio{{i}}" required>
     <br><br>
     {% endfor %}
 
     RESTRICCIONES: <br><br>
     {% for j in range(restriccion) %}
     Restricción {{j+1}}:
-    <input type="text" name="restriction{{j}}" id="restriction{{j}}">
+    <input type="text" name="restriction{{j}}" id="restriction{{j}}" required>
     <br><br>
     {% endfor %}
 

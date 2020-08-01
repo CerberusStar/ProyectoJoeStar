@@ -10,31 +10,25 @@
 <body>
     <form action="/inicio/session/update" method="POST">
         Nombre: <br>
-        <input type="text" name="nombre" id="nombre" value="{{nombre1}}">
+        <input type="text" name="nombre" id="nombre" value="{{nombre1}}" required>
         <br><br>
         Apellido: <br>
-        <input type="text" name="apellido" id="apellido" value="{{apellido1}}">
-        <br><br>
-        Usuario: <br>
-        <input type="text" name="usuario" id="usuario" value="{{usuario1}}">
+        <input type="text" name="apellido" id="apellido" value="{{apellido1}}" required>
         <br><br>
         Contraseña: <br>
-        <input type="password" name="password" id="password" value="{{password1}}">
+        <input type="password" name="password" id="password" required>
         <br><br>
         Email: <br>
-        <input type="email" name="email" id="email" value="{{email1}}">
+        <input type="email" name="email" id="email" value="{{email1}}" required>
         <br><br>
         Peso (en kilogramos y con dos decimales): <br>
-        <input type="text" name="peso" id="peso" value="{{peso1}}">
+        <input type="text" name="peso" id="peso" value="{{peso1}}" required>
         <br><br>
         Edad: <br>
-        <input type="text" name="edad" id="edad" value="{{edad1}}">
-        <br><br>
-        Sexo: <br>
-        <input type="text" name="sexo" id="sexo" value="{{sexo1}}">
+        <input type="text" name="edad" id="edad" value="{{edad1}}" required>
         <br><br>
         Altura (en metros y con dos decimales): <br>
-        <input type="text" name="altura" id="altura" value="{{altura1}}">
+        <input type="text" name="altura" id="altura" value="{{altura1}}" required>
         <br><br>
         <input type="submit" value="Guardar cambios">
         <a href="/inicio/sesion"><input type="button" value="Cancelar"></a>

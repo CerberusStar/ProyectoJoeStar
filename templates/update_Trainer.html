@@ -10,22 +10,19 @@
 <body>
     <form action="/trainer/session/update" method="POST">
         Nombre: <br>
-        <input type="text" name="nombre" id="nombre" value="{{nombre1}}">
+        <input type="text" name="nombre" id="nombre" value="{{nombre1}}" required>
         <br><br>
         Apellido: <br>
-        <input type="text" name="apellido" id="apellido" value="{{apellido1}}">
-        <br><br>
-        Usuario: <br>
-        <input type="text" name="usuario" id="usuario" value="{{usuario1}}">
+        <input type="text" name="apellido" id="apellido" value="{{apellido1}}" required>
         <br><br>
         Contraseña: <br>
-        <input type="password" name="password" id="password" value="{{password1}}">
+        <input type="password" name="password" id="password" value="{{password1}}" required>
         <br><br>
         Descripcion: <br>
-        <input type="text" name="descripcion" id="descripcion" value="{{descripcion1}}">
+        <input type="text" name="descripcion" id="descripcion" value="{{descripcion1}}" required>
         <br><br>
         Email: <br>
-        <input type="email" name="email" id="email" value="{{email1}}">
+        <input type="email" name="email" id="email" value="{{email1}}" required>
         <br><br>
         <input type="submit" value="Guardar cambios">
         <a href="/trainer/sesion"><input type="button" value="Cancelar"></a>

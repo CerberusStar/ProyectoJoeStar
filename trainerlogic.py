@@ -52,13 +52,11 @@ class TrainerLogic(Logic):
         answer2 = database.executeNonQueryBool(sql)
         return answer2
 
-    def updateTrainer(
-        self, id, nombre, apellido, usuario, password, descripcion, email
-    ):
+    def updateTrainer(self, id, nombre, apellido, password, descripcion, email):
         database = self.get_databaseXObj()
         sql = (
             "UPDATE proyectocerberus.trainer SET "
-            + f"firstname = '{nombre}', lastname = '{apellido}', username = '{usuario}', password = '{password}', "
+            + f"firstname = '{nombre}', lastname = '{apellido}', password = '{password}', "
             + f"description = '{descripcion}', email = '{email}' WHERE (id = '{id}');"
         )
         answer = database.executeNonQueryBool(sql)

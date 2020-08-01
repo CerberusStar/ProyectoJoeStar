@@ -39,6 +39,7 @@ def loginform():
         userdata = logic.getUserData(usuario)
         if userdata is not None:
             session["username"] = userdata.usuario
+            session["user_id"] = userdata.id
             if userdata.password == password:
                 return redirect(url_for("iniciarsesion"))
             else:
@@ -65,17 +66,37 @@ def registerform():
         email = request.form["email"]
         peso = request.form["peso"]
         edad = request.form["edad"]
-        sexo = request.form["sexo"]
+        gender = request.form["gender"]
+        if gender == "male":
+            sexo = 1
+        elif gender == "female":
+            sexo = 0
+
         altura = request.form["altura"]
         logic = UserLogic()
-        confirmation = logic.insertUser(
-            nombre, apellido, usuario, password, email, peso, edad, altura, sexo
-        )
-        if confirmation is True:
-            session["username"] = usuario
-            return redirect(url_for("iniciarsesion"))
+        controlDeErrorUsernameUser = logic.getUserData(usuario)
+        if controlDeErrorUsernameUser is None:
+            confirmation = logic.insertUser(
+                nombre, apellido, usuario, password, email, peso, edad, altura, sexo
+            )
+            if confirmation is True:
+                session["username"] = usuario
+                return redirect(url_for("iniciarsesion"))
+            else:
+                return "hay un problema"
         else:
-            return "hay un problema"
+            return render_template(
+                "registerform.html",
+                messageUserExisted="Ya existe ese usuario, por favor escoja otro",
+                nombre=nombre,
+                apellido=apellido,
+                usuario=usuario,
+                email=email,
+                peso=peso,
+                edad=edad,
+                sexo=sexo,
+                altura=altura,
+            )
 
 
 @app.route("/inicio/sesion", methods=MethodUtil.list_ALL())
@@ -113,7 +134,6 @@ def updateUser():
             logic = UserLogic()
             data = logic.getUserData(session["username"])
             if data is not None:
-                id = data.id
                 nombre = data.nombre
                 apellido = data.apellido
                 usuario = data.usuario
@@ -122,49 +142,39 @@ def updateUser():
                 peso = data.peso
                 edad = data.edad
                 altura = data.altura
-                sexo = data.sexo
-
-                session["id_user"] = id
+                session["id_user"] = data.id
 
             return render_template(
                 "update_user.html",
                 nombre1=nombre,
                 apellido1=apellido,
-                usuario1=usuario,
-                password1=password,
+                username1=usuario,
                 email1=email,
                 peso1=peso,
                 edad1=edad,
                 altura1=altura,
-                sexo1=sexo,
             )
         else:
             nombre = request.form["nombre"]
             apellido = request.form["apellido"]
-            usuario = request.form["usuario"]
             password = request.form["password"]
             email = request.form["email"]
             peso = request.form["peso"]
             edad = request.form["edad"]
             altura = request.form["altura"]
-            sexo = request.form["sexo"]
             logic = UserLogic()
             confirmation = logic.updateUser(
                 session["id_user"],
                 nombre,
                 apellido,
-                usuario,
                 password,
                 email,
                 peso,
                 edad,
                 altura,
-                sexo,
             )
 
             if confirmation is True:
-                session.pop("username", None)
-                session["username"] = usuario
                 return redirect(url_for("iniciarsesion"))
     else:
         return redirect(url_for("inicio"))
@@ -222,14 +232,26 @@ def registerformTrainer():
         email = request.form["email"]
         descripcion = request.form["descripcion"]
         logic = TrainerLogic()
-        confirmation = logic.insertTrainer(
-            nombre, apellido, usuario, password, descripcion, email
-        )
-        if confirmation is True:
-            session["usernameTrainer"] = usuario
-            return redirect(url_for("iniciarsesionTrainer"))
+        controlDeErrorUsername = logic.getTrainerData(usuario)
+        if controlDeErrorUsername is None:
+            confirmation = logic.insertTrainer(
+                nombre, apellido, usuario, password, descripcion, email
+            )
+            if confirmation is True:
+                session["usernameTrainer"] = usuario
+                return redirect(url_for("iniciarsesionTrainer"))
+            else:
+                return "hay un problema"
         else:
-            return "hay un problema"
+            return render_template(
+                "registerformTrainer.html",
+                message2="Ya existe ese username, escoja otro",
+                nombre=nombre,
+                apellido=apellido,
+                usuario=usuario,
+                email=email,
+                descripcion=descripcion,
+            )
 
 
 @app.route("/trainer/sesion", methods=MethodUtil.list_ALL())
@@ -272,7 +294,6 @@ def updateUserTrainer():
                 id = data.id
                 nombre = data.firstname
                 apellido = data.lastname
-                usuario = data.username
                 password = data.password
                 description = data.description
                 email = data.email
@@ -282,7 +303,6 @@ def updateUserTrainer():
                 "update_Trainer.html",
                 nombre1=nombre,
                 apellido1=apellido,
-                usuario1=usuario,
                 password1=password,
                 descripcion1=description,
                 email1=email,
@@ -290,24 +310,15 @@ def updateUserTrainer():
         else:
             nombre = request.form["nombre"]
             apellido = request.form["apellido"]
-            usuario = request.form["usuario"]
             password = request.form["password"]
             description = request.form["descripcion"]
             email = request.form["email"]
             logic = TrainerLogic()
             confirmation = logic.updateTrainer(
-                session["id_trainer"],
-                nombre,
-                apellido,
-                usuario,
-                password,
-                description,
-                email,
+                session["id_trainer"], nombre, apellido, password, description, email,
             )
 
             if confirmation is True:
-                session.pop("usernameTrainer", None)
-                session["usernameTrainer"] = usuario
                 return redirect(url_for("iniciarsesionTrainer"))
     else:
         return redirect(url_for("inicioTrainer"))
