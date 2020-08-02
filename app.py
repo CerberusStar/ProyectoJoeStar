@@ -5,6 +5,8 @@ from userlogic import UserLogic
 from userobj import UserObj
 from trainerlogic import TrainerLogic
 from trainerobj import TrainerObj
+from courseObj import CourseObj
+from courseLogic import CourseLogic
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -40,6 +42,7 @@ def loginform():
         if userdata is not None:
             session["username"] = userdata.usuario
             session["user_id"] = userdata.id
+            session["wallet"] = userdata.wallet
             if userdata.password == password:
                 return redirect(url_for("iniciarsesion"))
             else:
@@ -102,7 +105,11 @@ def registerform():
 @app.route("/inicio/sesion", methods=MethodUtil.list_ALL())
 def iniciarsesion():
     if "username" in session:
-        return render_template("dashboard_user.html", userdata=session["username"])
+        return render_template(
+            "dashboard_user.html",
+            userdata=session["username"],
+            wallet=session["wallet"],
+        )
     else:
         return redirect(url_for("inicio"))
 
@@ -121,6 +128,7 @@ def borrar():
 @app.route("/inicio/session/salir", methods=MethodUtil.list_ALL())
 def salir():
     if "username" in session:
+        session.pop("wallet", None)
         session.pop("username", None)
         return redirect(url_for("inicio"))
     else:
@@ -205,6 +213,7 @@ def loginformTrainer():
         logic = TrainerLogic()
         userdata = logic.getTrainerData(usuario)
         if userdata is not None:
+            session["idtrainer"] = userdata.id
             session["usernameTrainer"] = userdata.username
             if userdata.password == password:
                 return redirect(url_for("iniciarsesionTrainer"))
@@ -322,6 +331,83 @@ def updateUserTrainer():
                 return redirect(url_for("iniciarsesionTrainer"))
     else:
         return redirect(url_for("inicioTrainer"))
+
+
+@app.route("/trainer/session/course", methods=MethodUtil.list_ALL())
+def courseTrainer():
+    if request.method == "GET":
+        course = CourseLogic()
+        data = course.getAllCoursesUrCourses(session["idtrainer"])
+        return render_template("courseFromTrainer.html", courses=data)
+    if request.method == "POST":
+        curso = request.form["name"]
+        desc = request.form["desc"]
+        duration = request.form["duration"]
+        cost = request.form["cost"]
+        logic = CourseLogic()
+        Confirmation = logic.insertCourse(
+            curso, desc, duration, cost, session["idtrainer"]
+        )
+        if Confirmation is True:
+            return redirect(url_for("courseTrainer"))
+        else:
+            return "Hubo problema"
+
+
+@app.route("/trainer/session/course/delete/<int:id>", methods=["GET"])
+def deleteCourseByTrainer(id):
+    if request.method == "GET":
+        logic = CourseLogic()
+        HopeAnswer = logic.deleteCourse(id)
+        if HopeAnswer != "Traitor":
+            return redirect("/trainer/session/course")
+        else:
+            return redirect("/traitor")
+
+
+@app.route("/trainer/session/course/update/<int:idd>", methods=MethodUtil.list_ALL())
+def updateCourse(idd):
+    if request.method == "GET":
+        logic = CourseLogic()
+        data = logic.getCourseData(idd)
+        if data is not None:
+            nombre = data.name
+            desc = data.description
+            duration = data.duration
+            return render_template(
+                "updateCourse.html",
+                idd=idd,
+                name1=nombre,
+                desc1=desc,
+                duration1=duration,
+            )
+        else:
+            return redirect("/traitor")
+
+    else:
+        nombre = request.form["name"]
+        desc = request.form["desc"]
+        duration = request.form["duration"]
+        cost = request.form["cost"]
+        logic = CourseLogic()
+        confirmation = logic.updateCourse(idd, nombre, desc, duration, cost)
+        if confirmation is True:
+            return redirect(url_for("courseTrainer"))
+        else:
+            return redirect("/traitor")
+
+
+@app.route("/traitor")
+def traitor():
+    return render_template("traitor.html", user=session["usernameTrainer"])
+
+
+@app.route("/trainer/session/course/updateStatus/<int:id>", methods=["GET"])
+def changeCourseStatusByTrainer(id):
+    if request.method == "GET":
+        logic = CourseLogic()
+        logic.changeCourseStatus(id)
+        return redirect("/trainer/session/course")
 
 
 @app.route("/trainer/beforeAmpl", methods=["POST"])

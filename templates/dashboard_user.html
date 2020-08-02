@@ -9,7 +9,21 @@
 
 <body>
     <h1>Hola {{userdata}}, es un gusto poder tenerte!</h1>
-    <br>
+    <br><br>
+    
+    <table width="280" cellspacing="1" cellpadding="3" border="0" bgcolor="#1E679A">
+    <tr>
+    <td><font color="#FFFFFF" face="arial, verdana, helvetica">
+    <b>Saldo disponible</b>
+    </font></td>
+    </tr>
+    <tr>
+    <td bgcolor="#ffffcc">
+    <font face="arial, verdana, helvetica">{{wallet}}</font>
+    </td>
+    </tr>
+    </table>
+    <br><br>
 
 
     <a href="/inicio/session/salir"><input type="button" value="Cerrar sesión"></a>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Agregar un nuevo curso</h1>
+    <form action="/trainer/session/course" method="POST">
+        Nombre del curso:
+        <input type="text" name="name" id="name" required>
+        <br><br>
+        Descripción:
+        <input type="text" name="desc" id="desc" required>
+        <br><br>
+        Duración:
+        <input type="text" name="duration" id="duration" required>
+        <br><br>
+        Costo:
+        <input type="number" name="cost" id="cost" required>
+        <br><br>
+        <input type="submit">
+    </form>
+    <br><br>
+    <h3>Si alguien ya compró el curso no se puede actualizar ni borrar</h3>
+    <h3>No se puede terminar un curso que alguién aún no ha comprado</h3>
+    <br><br>
+    <table style="width:50%" border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Duración</th>
+            <th>Costo</th>
+            <th>ID del usuario que lo compró</th>
+            <th>Estado del curso</th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{course[1]}}</td>
+            <td>{{course[2]}}</td>
+            <td>{{course[3]}}</td>
+            <td>${{course[4]}}</td>
+
+            {% if course[5] == None %}
+            <td>Nadie se ha suscrito</td>
+            <td>----------</td>
+            {% else %}
+            <td>{{course[5]}}</td>
+            
+            <td>{{course[7]}}</td>
+            {% endif %}
+
+            {% if course[5] == None %}
+            <td><a href="/trainer/session/course/update/{{course[0]}}">Actualizar</a></td>
+            <td><a href="/trainer/session/course/delete/{{course[0]}}">Borrar</a></td>
+            <td><a>No permitido</a></td>
+            {% else %}
+            <td><a>No permitido</a></td>
+            <td><a>No permitido</a></td>
+                {% if course[7] == "Finalizado" %}
+                <td><a>Curso terminado</a></td>
+                {% else %}
+                <td><a href="/trainer/session/course/updateStatus/{{course[0]}}">Terminar curso</a></td>
+                {% endif %}
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <a href="/trainer/sesion"><input type="button" value="Volver al perfil"></a>
+</body>
+</html>

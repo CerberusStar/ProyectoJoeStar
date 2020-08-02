@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Editar el curso</h1>
+    <form action="/trainer/session/course/update/{{idd}}" method="POST">
+        Nombre del curso:
+        <input type="text" name="name" id="name" value="{{name1}}" required>
+        <br><br>
+        Descripción:
+        <input type="text" name="desc" id="desc" value="{{desc1}}" required>
+        <br><br>
+        Duración:
+        <input type="text" name="duration" id="duration" value="{{duration1}}" required>
+        <br><br>
+        Costo:
+        <input type="number" name="cost" id="cost" required>
+        <br><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
