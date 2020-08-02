@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+</head>
+
+<body>
+    <h1>¿Seguro que quieres suscribirte a este curso?</h1>
+    <h2>{{Name}}</h2>
+    <br><br>
+    <h2>Tu saldo actual: ${{Actual}}</h2>
+    <br>
+    <h2>Costo del curso: ${{Cost}}</h2>
+    <br>
+    <h2>Tu nuevo saldo: ${{Nuevo}}</h2>
+    <br>
+    <form action="/inicio/session/course/buy/{{id}}" method="POST">
+        <input type="submit" value="Comprar">
+        <a href="/inicio/session/course"><input type="button" value="Cancelar"></a>
+    </form>
+</body>
+
+</html>

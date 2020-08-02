@@ -54,12 +54,6 @@ class UserLogic(Logic):
         answer = database.executeNonQueryBool(sql)
         return answer
 
-    def deleteUser(self, user):
-        database = self.get_databaseXObj()
-        sql = "DELETE FROM proyectocerberus.user " + f"WHERE (username = '{user}');"
-        answer2 = database.executeNonQueryBool(sql)
-        return answer2
-
     def updateUser(self, id, nombre, apellido, password, email, peso, edad, altura):
         database = self.get_databaseXObj()
         sql = (

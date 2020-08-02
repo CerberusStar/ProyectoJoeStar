@@ -48,7 +48,7 @@
             <td>Nadie se ha suscrito</td>
             <td>----------</td>
             {% else %}
-            <td>{{course[5]}}</td>
+            <td><a href="">{{course[5]}}</a></td>
             
             <td>{{course[7]}}</td>
             {% endif %}
@@ -58,8 +58,8 @@
             <td><a href="/trainer/session/course/delete/{{course[0]}}">Borrar</a></td>
             <td><a>No permitido</a></td>
             {% else %}
-            <td><a>No permitido</a></td>
-            <td><a>No permitido</a></td>
+            <td><a>----------</a></td>
+            <td><a>----------</a></td>
                 {% if course[7] == "Finalizado" %}
                 <td><a>Curso terminado</a></td>
                 {% else %}

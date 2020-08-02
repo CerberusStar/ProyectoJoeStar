@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Cursos disponibles para que te suscribas!</h1>
+    <h3>Wallet: {{wallet}}</h3>
+    <br><br>
+    <br><br>
+    <table style="width:50%" border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Duración</th>
+            <th>Costo</th>
+            <th>Entrenador</th> 
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{course[1]}}</td>
+            <td>{{course[2]}}</td>
+            <td>{{course[3]}}</td>
+            <td>${{course[4]}}</td>
+            <td><a>{{course[6]}}</a></td>
+            <td><a href="/inicio/session/course/suscription/{{course[1]}}/{{course[4]}}/{{course[0]}}">Suscribirse</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <h1>Todos tus cursos!</h1>
+    <br><br>
+    <table style="width:50%" border="2">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Duración</th>
+            <th>Costo</th>
+            <th>Entrenador</th>
+            <th>Estado</th>
+        </tr>
+        {% for suscription in suscriptions %}
+        <tr>
+            <td>{{suscription[1]}}</td>
+            <td>{{suscription[2]}}</td>
+            <td>{{suscription[3]}}</td>
+            <td>${{suscription[4]}}</td>
+            <td><a>{{suscription[6]}}</a></td>
+            <td>{{suscription[7]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <a href="/inicio/sesion"><input type="button" value="Volver al perfil"></a>
+</body>
+</html>
