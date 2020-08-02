@@ -22,6 +22,18 @@ class CourseLogic(Logic):
         data = database.executeQuery(sql)
         return data
 
+    def getAllCoursesAvailableCourses(self):
+        database = self.get_databaseXObj()
+        sql = f"select * from proyectocerberus.course where iduser is NULL;"
+        data = database.executeQuery(sql)
+        return data
+
+    def getAllCoursesUserSuscripted(self, iduser):
+        database = self.get_databaseXObj()
+        sql = f"select * from proyectocerberus.course where iduser='{iduser}';"
+        data = database.executeQuery(sql)
+        return data
+
     def insertCourse(self, name, description, duration, cost, idtrainer):
         database = self.get_databaseXObj()
         sql = (
@@ -97,4 +109,34 @@ class CourseLogic(Logic):
             + f"estado = 'Finalizado' WHERE (idcourse = '{idd}');"
         )
         answer = database.executeNonQueryBool(sql)
+        return answer
+
+    def buyCourse(self, idcourse, iduser):
+        database = self.get_databaseXObj()
+        # Consigo el costo del curso
+        sqlgetCost = (
+            f"select cost from proyectocerberus.course where (idcourse = '{idcourse}');"
+        )
+        courseCost = database.executeQuery(sqlgetCost)
+        courseCostData = float(courseCost[0][0])
+        # Consigo el dinero actual del usuario
+        sqlgetWallet = (
+            f"select wallet from proyectocerberus.user where (iduser = '{iduser}');"
+        )
+        userWallet = database.executeQuery(sqlgetWallet)
+        userWalletData = float(userWallet[0][0])
+        # Consigo el nuevo dinero del user
+        AdjustedWallet = userWalletData - courseCostData
+        # Actualizo la billetera del usuario
+        sqlActualizeWallet = (
+            "UPDATE proyectocerberus.user SET "
+            + f"wallet = {AdjustedWallet} WHERE (iduser = '{iduser}');"
+        )
+        database.executeNonQueryBool(sqlActualizeWallet)
+        # Me suscribo al curso
+        sqlCourse = (
+            "UPDATE proyectocerberus.course SET "
+            + f"iduser = '{iduser}' WHERE (idcourse = '{idcourse}');"
+        )
+        answer = database.executeNonQueryBool(sqlCourse)
         return answer

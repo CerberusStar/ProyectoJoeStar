@@ -84,7 +84,7 @@ def registerform():
             )
             if confirmation is True:
                 session["username"] = usuario
-                return redirect(url_for("iniciarsesion"))
+                return redirect(url_for("loginform"))
             else:
                 return "hay un problema"
         else:
@@ -110,17 +110,6 @@ def iniciarsesion():
             userdata=session["username"],
             wallet=session["wallet"],
         )
-    else:
-        return redirect(url_for("inicio"))
-
-
-@app.route("/inicio/session/borrar", methods=MethodUtil.list_ALL())
-def borrar():
-    if "username" in session:
-        logic = UserLogic()
-        confirmation = logic.deleteUser(session["username"])
-        if confirmation is True:
-            return redirect(url_for("salir"))
     else:
         return redirect(url_for("inicio"))
 
@@ -188,6 +177,55 @@ def updateUser():
         return redirect(url_for("inicio"))
 
 
+@app.route("/inicio/session/course", methods=MethodUtil.list_GETOnly())
+def courseUser():
+    course = CourseLogic()
+    data = course.getAllCoursesAvailableCourses()
+    data2 = course.getAllCoursesUserSuscripted(session["id_user"])
+    return render_template(
+        "courseAvailableFromUser.html",
+        courses=data,
+        suscriptions=data2,
+        wallet=session["wallet"],
+    )
+
+
+@app.route(
+    "/inicio/session/course/suscription/<string:name>/<string:cost>/<int:idd>",
+    methods=MethodUtil.list_GETOnly(),
+)
+def courseSuscriptionUser(name, cost, idd):
+    costDouble = float(cost)
+    ActualMoney = session["wallet"]
+    NewMoney = ActualMoney - costDouble
+    session["adjustedWallet"] = NewMoney
+    if NewMoney < 0:
+        return render_template(
+            "error.html",
+            message="No tienes suficientes fondos, agrega más a tu wallet antes de comprar",
+        )
+    else:
+        return render_template(
+            "courseSuscriptionConfirmation.html",
+            Name=name,
+            Actual=ActualMoney,
+            Cost=cost,
+            Nuevo=NewMoney,
+            id=idd,
+        )
+
+
+@app.route(
+    "/inicio/session/course/buy/<int:idcourse>", methods=MethodUtil.list_POSTOnly()
+)
+def buyCourse(idcourse):
+    iduser = session["user_id"]
+    actualCourse = CourseLogic()
+    actualCourse.buyCourse(idcourse, iduser)
+    session["wallet"] = session["adjustedWallet"]
+    return redirect(url_for("courseUser"))
+
+
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 # -------------------------------------------------------------
@@ -248,7 +286,7 @@ def registerformTrainer():
             )
             if confirmation is True:
                 session["usernameTrainer"] = usuario
-                return redirect(url_for("iniciarsesionTrainer"))
+                return redirect(url_for("loginformTrainer"))
             else:
                 return "hay un problema"
         else:
@@ -269,17 +307,6 @@ def iniciarsesionTrainer():
         return render_template(
             "dashboard_trainer.html", userdata=session["usernameTrainer"]
         )
-    else:
-        return redirect(url_for("inicioTrainer"))
-
-
-@app.route("/trainer/session/borrar", methods=MethodUtil.list_ALL())
-def borrarTrainer():
-    if "usernameTrainer" in session:
-        logic = TrainerLogic()
-        confirmation = logic.deleteTrainer(session["usernameTrainer"])
-        if confirmation is True:
-            return redirect(url_for("salirTrainer"))
     else:
         return redirect(url_for("inicioTrainer"))
 

@@ -44,14 +44,6 @@ class TrainerLogic(Logic):
         answer = database.executeNonQueryBool(sql)
         return answer
 
-    def deleteTrainer(self, trainer):
-        database = self.get_databaseXObj()
-        sql = (
-            "DELETE FROM proyectocerberus.trainer " + f"WHERE (username = '{trainer}');"
-        )
-        answer2 = database.executeNonQueryBool(sql)
-        return answer2
-
     def updateTrainer(self, id, nombre, apellido, password, descripcion, email):
         database = self.get_databaseXObj()
         sql = (
