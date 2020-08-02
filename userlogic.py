@@ -60,14 +60,12 @@ class UserLogic(Logic):
         answer2 = database.executeNonQueryBool(sql)
         return answer2
 
-    def updateUser(
-        self, id, nombre, apellido, usuario, password, email, peso, edad, altura, sexo
-    ):
+    def updateUser(self, id, nombre, apellido, password, email, peso, edad, altura):
         database = self.get_databaseXObj()
         sql = (
             "UPDATE proyectocerberus.user SET "
-            + f"firstname = '{nombre}', lastname = '{apellido}', username = '{usuario}', password = '{password}', "
-            + f"email = '{email}', weigth = '{peso}', age = '{edad}', size = '{altura}', gender = '{sexo}'  WHERE (iduser = '{id}');"
+            + f"firstname = '{nombre}', lastname = '{apellido}', password = '{password}', "
+            + f"email = '{email}', weigth = '{peso}', age = '{edad}', size = '{altura}'  WHERE (iduser = '{id}');"
         )
         answer = database.executeNonQueryBool(sql)
         return answer

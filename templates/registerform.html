@@ -15,31 +15,35 @@
     <p style="color: red;">{{message}}</p>
     <form action="/inicio/registerform" method="POST">
         Nombre: <br>
-        <input type="text" name="nombre" id="nombre">
+        <input type="text" name="nombre" id="nombre" value="{{nombre}}" required>
         <br><br>
         Apellido: <br>
-        <input type="text" name="apellido" id="apellido">
+        <input type="text" name="apellido" id="apellido" value="{{apellido}}" required>
         <br><br>
+        <p style="color: red;">{{messageUserExisted}}</p>
         Usuario: <br>
-        <input type="text" name="usuario" id="usuario">
+        <input type="text" name="usuario" id="usuario" value="{{usuario}}" required>
         <br><br>
         Contraseña: <br>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" required>
         <br><br>
         Email: <br>
-        <input type="email" name="email" id="email">
+        <input type="email" name="email" id="email" value="{{email}}" required>
         <br><br>
         Peso (en kilogramos y con dos decimales): <br>
-        <input type="text" name="peso" id="peso">
+        <input type="text" name="peso" id="peso" value="{{peso}}" required>
         <br><br>
         Edad: <br>
-        <input type="text" name="edad" id="edad">
+        <input type="text" name="edad" id="edad" value="{{edad}}" required>
         <br><br>
         Sexo: <br>
-        <input type="text" name="sexo" id="sexo">
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Hombre</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Mujer</label><br>
         <br><br>
         Altura (en metros y con dos decimales): <br>
-        <input type="text" name="altura" id="altura">
+        <input type="text" name="altura" id="altura" value="{{altura}}" required>
         <br><br>
         <input type="submit" value="Crear usuario">
         <a href="/inicio"><input type="button" value="Cancelar"></a>
