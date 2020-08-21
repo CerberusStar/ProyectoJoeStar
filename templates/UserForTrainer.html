@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <br><br>
+    <h3>Perfil de {{data.nombre}} {{data.apellido}}</h3>
+    <br><br>
+    Edad: {{data.edad}}
+    <br><br>
+    Sexo: {{data.sexo}}
+    <br><br>
+    Peso: {{data.peso}} kilogramos
+    <br><br>
+    Estatura: {{data.altura}} metros
+    <br><br>
+    IMC: {{imc}}
+    <br><br>
+    Estado del usuario:
+            {% if imc<18.5 %}
+            <p>Peso inferior al normal</p>
+            {% elif 18.5<=imc<=24.9%}
+            <p>Peso normal</p>
+            {% elif 25.0<=imc<=29.9%}
+            <p>Peso superior al normal</p>
+            {% else %}
+            <p>Obesidad</p>
+            {% endif %}
+    <a href="/trainer/session/course"><input type="button" value="Volver a los cursos"></a>
+    <a href="/trainer/session/update"><input type="button" value="Modificar su rutina"></a>
+    <a href=""><input type="button" value="Chat"></a>
+</body>
+</html>
