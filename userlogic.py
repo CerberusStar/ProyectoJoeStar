@@ -43,6 +43,30 @@ class UserLogic(Logic):
         else:
             return None
 
+    def getUserDataByID(self, id):
+            database = self.get_databaseXObj()
+            sql = f"select * from proyectocerberus.user where iduser='{id}';"
+            data = database.executeQuery(sql)
+            data = self.tupleToDictionaryList(data, self.keys)
+            if len(data) > 0:
+                data_dic = data[0]
+                userObj = UserObj(
+                    data_dic["iduser"],
+                    data_dic["firstname"],
+                    data_dic["lastname"],
+                    data_dic["username"],
+                    data_dic["password"],
+                    data_dic["email"],
+                    data_dic["weigth"],
+                    data_dic["age"],
+                    data_dic["size"],
+                    data_dic["gender"],
+                    data_dic["wallet"],
+                )
+                return userObj
+            else:
+                return None
+
     def insertUser(
         self, nombre, apellido, usuario, password, email, peso, edad, altura, sexo
     ):

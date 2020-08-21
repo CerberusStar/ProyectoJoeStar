@@ -14,7 +14,6 @@ codigoampl = Control()
 app = Flask(__name__)
 app.secret_key = "prueba"
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -427,6 +426,17 @@ def updateCourse(idd):
 @app.route("/traitor")
 def traitor():
     return render_template("traitor.html", user=session["usernameTrainer"])
+
+@app.route("/trainer/session/userAcount/<int:id>/<string:status>", methods=["GET"])
+def seeUserAcount(id, status):
+    if request.method == "GET":
+        if status == "No finalizado":
+            logicuser = UserLogic()
+            data = logicuser.getUserDataByID(id)
+            imc = "{0:.2f}".format(data.peso/(data.altura*data.altura))
+            imc = float(imc)
+            return render_template("UserForTrainer.html", data=data, imc=imc)
+        return render_template("error.html", message="Este curso ya ha finalizado, no se puede acceder al perfil")
 
 
 @app.route("/trainer/session/course/updateStatus/<int:id>", methods=["GET"])
