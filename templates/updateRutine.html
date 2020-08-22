@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Modificar el ejercicio</h1>
+    <form action="/trainer/session/rutine/update/{{idd}}" method="POST">
+        Etapa: <br>
+        <input type="number" name="etapa" id="etapa" required>
+        <br><br>
+        Ejercicio: <br>
+        <input type="text" name="ejercicio" id="ejercicio" value="{{ejercicio}}" required>
+        <br><br>
+        Tiempo (en minutos): <br>
+        <input type="number" name="time" id="time" required>
+        <br><br>
+        Repeticiones: <br>
+        <input type="text" name="set" id="set" value="{{repetition}}" required>
+        <br><br>
+        <input type="submit" value="Modificar ejercicio">
+    </form>
+</body>
+</html>
