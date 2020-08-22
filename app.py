@@ -7,6 +7,8 @@ from trainerlogic import TrainerLogic
 from trainerobj import TrainerObj
 from courseObj import CourseObj
 from courseLogic import CourseLogic
+from rutineLogic import rutineLogic
+from rutineObj import RutineObj
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -104,10 +106,13 @@ def registerform():
 @app.route("/inicio/sesion", methods=MethodUtil.list_ALL())
 def iniciarsesion():
     if "username" in session:
+        rutine = rutineLogic()
+        data = rutine.getAllRutinesFromUser(session["user_id"])
         return render_template(
             "dashboard_user.html",
             userdata=session["username"],
             wallet=session["wallet"],
+            rutinas = data,
         )
     else:
         return redirect(url_for("inicio"))
@@ -431,6 +436,7 @@ def traitor():
 def seeUserAcount(id, status):
     if request.method == "GET":
         if status == "No finalizado":
+            session["usernameUserFromTrainer"] = id
             logicuser = UserLogic()
             data = logicuser.getUserDataByID(id)
             imc = "{0:.2f}".format(data.peso/(data.altura*data.altura))
@@ -438,7 +444,28 @@ def seeUserAcount(id, status):
             return render_template("UserForTrainer.html", data=data, imc=imc)
         return render_template("error.html", message="Este curso ya ha finalizado, no se puede acceder al perfil")
 
+@app.route("/trainer/session/userAcount/rutine", methods=["GET", "POST"])
+def userRutine():
+    if request.method == "GET":
+        rutine = rutineLogic()
+        data = rutine.getAllRutinesFromUser(session["usernameUserFromTrainer"])
+        return render_template("rutinasDelUsuario.html", rutinas=data)
+    if request.method == "POST":
+        Etapa = request.form["etapa"]
+        Ejercicio = request.form["ejercicio"]
+        Time = request.form["time"]
+        Set = request.form["set"]
+        logic = rutineLogic()
+        logic.insertRutina(session["idtrainer"], session["usernameUserFromTrainer"], Ejercicio, Etapa, Time, Set)
+        return redirect(url_for("userRutine"))
 
+@app.route("/trainer/session/rutine/delete/<int:id>", methods=["GET"])
+def deleteRutineByTrainer(id):
+    if request.method == "GET":
+        logic = rutineLogic()
+        logic.deleteRutina(id)
+        return redirect("/trainer/session/userAcount/rutine")
+        
 @app.route("/trainer/session/course/updateStatus/<int:id>", methods=["GET"])
 def changeCourseStatusByTrainer(id):
     if request.method == "GET":
@@ -446,6 +473,28 @@ def changeCourseStatusByTrainer(id):
         logic.changeCourseStatus(id)
         return redirect("/trainer/session/course")
 
+@app.route("/trainer/session/rutine/update/<int:idd>", methods=MethodUtil.list_ALL())
+def updateRutine(idd):
+    if request.method == "GET":
+        logic2 = rutineLogic()
+        data = logic2.getRutineData(idd)
+        if data is not None:
+            ejercicio1 = data.exercise
+            repeticiones1 = data.repetition
+            return render_template(
+                "updateRutine.html",
+                idd = idd,
+                ejercicio = ejercicio1,
+                repetition = repeticiones1,
+            )
+    else:
+        Etapa = request.form["etapa"]
+        Ejercicio = request.form["ejercicio"]
+        Time = request.form["time"]
+        Set = request.form["set"]
+        logic = rutineLogic()
+        confirmation = logic.updateRutina(idd,Ejercicio, Etapa, Time, Set)
+        return redirect(url_for("userRutine"))
 
 @app.route("/trainer/beforeAmpl", methods=["POST"])
 def update():

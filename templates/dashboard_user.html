@@ -27,6 +27,24 @@
     </table>
     <br><br>
 
+    <h1>Tu rutina!</h1>
+        <table style="width:50%" border="1">
+        <tr>
+            <th>Etapa</th>
+            <th>Ejercicio</th>
+            <th>Tiempo</th>
+            <th>Repeticiones</th>
+        </tr>
+        {% for rutina in rutinas %}
+        <tr>
+            <td>{{rutina[4]}}</td>
+            <td>{{rutina[3]}}</td>
+            <td>{{rutina[5]}} minutos</td>
+            <td>{{rutina[6]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
 
     <a href="/inicio/session/salir"><input type="button" value="Cerrar sesión"></a>
     <a href="/inicio/session/update"><input type="button" value="modificar mis datos"></a>

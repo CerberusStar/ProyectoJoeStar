@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Rutina del usuario</h1>
+    <table style="width:50%" border="1">
+        <tr>
+            <th>Etapa</th>
+            <th>Ejercicio</th>
+            <th>Tiempo</th>
+            <th>Repeticiones</th>
+        </tr>
+        {% for rutina in rutinas %}
+        <tr>
+            <td>{{rutina[4]}}</td>
+            <td>{{rutina[3]}}</td>
+            <td>{{rutina[5]}} minutos</td>
+            <td>{{rutina[6]}}</td>
+            
+
+
+            <td><a href="/trainer/session/rutine/update/{{rutina[0]}}">Actualizar</a></td>
+            <td><a href="/trainer/session/rutine/delete/{{rutina[0]}}">Borrar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br>
+    <h1>Agregar nuevo ejercicio a la rutina </h1>
+    <br>
+
+    <p style="color: red;">{{message}}</p>
+    <form action="/trainer/session/userAcount/rutine" method="POST">
+        Etapa: <br>
+        <input type="number" name="etapa" id="etapa" required>
+        <br><br>
+        Ejercicio: <br>
+        <input type="text" name="ejercicio" id="ejercicio" required>
+        <br><br>
+        Tiempo (en minutos): <br>
+        <input type="number" name="time" id="time" required>
+        <br><br>
+        Repeticiones: <br>
+        <input type="text" name="set" id="set" required>
+        <br><br>
+        <input type="submit" value="Añadir ejercicio">
+    </form>
+</body>
+</html>
