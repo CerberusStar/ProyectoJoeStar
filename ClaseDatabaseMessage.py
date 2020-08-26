@@ -38,7 +38,7 @@ class Database:
 
     def getConvByIdConv(self, id_conv):
         con, cursor = self.__createCursor()
-        id_conVe = id_conv[0][0]
+        id_conVe = id_conv
         sql = (
             "select * from proyectocerberus.conversation_reply where"
             + f" c_id_fk = {id_conVe} ; "
@@ -46,4 +46,8 @@ class Database:
         cursor.execute(sql)
         data = cursor.fetchall()
         return data
+
+
+datab = Database()
+datab.getIdConv(1, 1)
 

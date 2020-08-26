@@ -566,9 +566,15 @@ def ampl():
 @app.route("/trainer/session/course/chat", methods=MethodUtil.list_ALL())
 def chat():
     if request.method == "GET":
-        course = CourseLogic()
+        mss = Database()
         idm = session["idtrainer"]
-        return render_template("courseFromTrainer.html", id=idm)
+        idConv = mss.getIdConv(session["usernameUserFromTrainer"], session["idtrainer"])
+        if len(idConv) == 0:
+            data = 0
+            return render_template("TrainerChat.html", conver=data)
+        else:
+            data = mss.getConvByIdConv(idConv[0][0])
+            return render_template("TrainerChat.html", conver=data)
 
 
 if __name__ == "__main__":
