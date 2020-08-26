@@ -21,6 +21,7 @@ class Database:
 
     def insertMessage(self, message, id_c, iduserFrom, typeU):
         con, cursor = self.__createCursor()
+        valueC = int(id_c[0][0])
         if typeU == 1:
             statusU = "trainer"
         else:
@@ -29,14 +30,20 @@ class Database:
         sql = (
             "insert into proyectocerberus.conversation_reply"
             + "(cr_id, reply, user_trainer_id_fk, ip, time, status, c_id_fk, typeUser)"
-            + f"values(0, '{message}', {iduserFrom},'192.168.0.1', 15556, 'read', {iduserFrom}, '{statusU}'); "
+            + f"values(0, '{message}', {iduserFrom},'192.168.0.1', '15556', 1, {valueC}, '{statusU}'); "
         )
         cursor.execute(sql)
         con.commit()
         return cursor.rowcount
 
+    def getConvByIdConv(self, id_conv):
+        con, cursor = self.__createCursor()
+        id_conVe = id_conv[0][0]
+        sql = (
+            "select * from proyectocerberus.conversation_reply where"
+            + f" c_id_fk = {id_conVe} ; "
+        )
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        return data
 
-datab = Database()
-mss = "Hola mundo"
-idconver = datab.getIdConv(1, 1)
-datab.insertMessage(mss, idconver, 1, 1)
