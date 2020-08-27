@@ -229,10 +229,8 @@ def courseUser():
 def seeTrainerAcount(idtrainer):
     if request.method == "GET":
         session["TrainerIDGetByUser"] = idtrainer
-        print(idtrainer)
         logictrainer = TrainerLogic()
         data = logictrainer.getTrainerDataById(idtrainer)
-        print(data)
         return render_template("trainerprofilefromuser.html", data=data)
 
 

@@ -1,7 +1,0 @@
-var Sandia integer >= 0;
-var mango integer >= 0;
-minimize cost: 3*Sandia + 3*mango;
-subject to Restriccion1: Sandia + mango = 4;
-option solver "C:\Proyecto\ProyectoJoeStar\AMPL\gurobi.exe";
-solve;
-display Sandia,mango > C:\Proyecto\ProyectoJoeStar\datosAMPL\pruebareset.txt;
