@@ -20,10 +20,13 @@ import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 from os import remove
+
 ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
+
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 database = Database()
 codigoampl = Control()
@@ -40,6 +43,7 @@ def index():
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 # -------------------------------------------------------------
+
 
 @app.route("/inicio", methods=MethodUtil.list_ALL())
 def inicio():
@@ -124,7 +128,7 @@ def iniciarsesion():
     if "username" in session:
         rutine = rutineLogic()
         data = rutine.getAllRutinesFromUser(session["user_id"])
-        
+
         usuario = session["username"]
         login = UserLogic()
         nombreCompletoImagen = os.getcwd() + f"\\static\\uploads\\{usuario}.jpg"
@@ -138,8 +142,8 @@ def iniciarsesion():
             "dashboard_user.html",
             userdata=session["username"],
             wallet=session["wallet"],
-            rutinas = data,
-            filename = filename,
+            rutinas=data,
+            filename=filename,
         )
     else:
         return redirect(url_for("inicio"))
@@ -220,6 +224,7 @@ def courseUser():
         wallet=session["wallet"],
     )
 
+
 @app.route("/inicio/session/course/trainer/<int:idtrainer>", methods=["GET"])
 def seeTrainerAcount(idtrainer):
     if request.method == "GET":
@@ -229,7 +234,7 @@ def seeTrainerAcount(idtrainer):
         data = logictrainer.getTrainerDataById(idtrainer)
         print(data)
         return render_template("trainerprofilefromuser.html", data=data)
-        
+
 
 @app.route(
     "/inicio/session/course/suscription/<string:name>/<string:cost>/<int:idd>",
@@ -255,6 +260,7 @@ def courseSuscriptionUser(name, cost, idd):
             id=idd,
         )
 
+
 @app.route("/inicio/session/photo", methods=MethodUtil.list_ALL())
 def photo():
     if "username" in session:
@@ -274,34 +280,34 @@ def photo():
                 return redirect(request.url)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                comprobacion = os.path.exists("static/uploads/"+f"{usuario}.jpg")
+                comprobacion = os.path.exists("static/uploads/" + f"{usuario}.jpg")
                 if comprobacion is True:
-                    remove("static/uploads/"+f"{usuario}.jpg")
+                    remove("static/uploads/" + f"{usuario}.jpg")
                 file.save(os.path.join(changephoto.config["UPLOAD_FOLDER"], filename))
                 flash("Image successfully uploaded and displayed")
                 print(filename)
-                
+
                 logic = UserLogic()
                 nombreimagen = os.getcwd() + f"\\static\\uploads\\{filename}"
-                confirmation = logic.insertphotoUser(session["username"],nombreimagen)
+                confirmation = logic.insertphotoUser(session["username"], nombreimagen)
 
                 archivo = f"static/uploads/{filename}"
-                nombre_nuevo = "static/uploads/"+f"{usuario}.jpg"
+                nombre_nuevo = "static/uploads/" + f"{usuario}.jpg"
                 os.rename(archivo, nombre_nuevo)
-                
+
                 nombre = f"{usuario}.jpg"
 
-                #print(nombre)
+                # print(nombre)
                 if confirmation is True:
                     return render_template("changephoto.html", filename=nombre)
             else:
                 flash("Allowed image types are -> png, jpg, jpeg, gif")
                 return redirect(request.url)
 
+
 @app.route("/display/<filename>")
 def display_image(filename):
     return redirect(url_for("static", filename="uploads/" + filename), code=301)
-
 
 
 @app.route(
@@ -313,6 +319,7 @@ def buyCourse(idcourse):
     actualCourse.buyCourse(idcourse, iduser)
     session["wallet"] = session["adjustedWallet"]
     return redirect(url_for("courseUser"))
+
 
 @app.route("/inicio/session/saldo/pay", methods=MethodUtil.list_ALL())
 def pay():
@@ -328,24 +335,32 @@ def pay():
         date = x.strftime("%x")
         amount = request.form["cantidad"]
         logic = WalletLogic()
-        iduser= session["user_id"]
-        data = logic.insertToWallet(id, iduser, tarjeta, cvv, month, year, ownercard, date, amount)
+        iduser = session["user_id"]
+        data = logic.insertToWallet(
+            id, iduser, tarjeta, cvv, month, year, ownercard, date, amount
+        )
         if data is True:
-            session["user_id"] =iduser
+            session["user_id"] = iduser
             pay = float(amount)
             if pay < 0:
-                return render_template("error.html", message="La cantidad ingresada no es valida, intentalo de nuevo")
+                return render_template(
+                    "error.html",
+                    message="La cantidad ingresada no es valida, intentalo de nuevo",
+                )
             else:
                 actualMoney = session["wallet"]
                 payment = pay + actualMoney
                 session["adjustedWallet"] = payment
-                return render_template("payconfirmation.html", amount = amount, payment = payment)
+                return render_template(
+                    "payconfirmation.html", amount=amount, payment=payment
+                )
         else:
-            return render_template("error.html", message="hubo un error intentelo de nuevo")
+            return render_template(
+                "error.html", message="hubo un error intentelo de nuevo"
+            )
 
-@app.route(
-    "/inicio/session/saldo/payment", methods=MethodUtil.list_POSTOnly()
-)
+
+@app.route("/inicio/session/saldo/payment", methods=MethodUtil.list_POSTOnly())
 def payment():
     if request.method == "POST":
         actualWallet = WalletLogic()
@@ -353,12 +368,37 @@ def payment():
         session["wallet"] = session["adjustedWallet"]
         return redirect(url_for("iniciarsesion"))
 
+
 @app.route("/inicio/session/saldo/tarjetas", methods=MethodUtil.list_ALL())
 def payHistory():
     if request.method == "GET":
         entradas = WalletLogic()
         data = entradas.getAllByID(session["user_id"])
         return render_template("tablePays.html", pays=data)
+
+
+@app.route("/inicio/session/course/chat", methods=MethodUtil.list_ALL())
+def chatU():
+    mss = Database()
+    if request.method == "GET":
+        idConv = mss.getIdConv(session["user_id"], session["TrainerIDGetByUser"])
+        if len(idConv) == 0:
+            data = 0
+            return render_template("UserChat.html", conver=data)
+        else:
+            data = mss.getConvByIdConv(idConv[0][0])
+            return render_template("UserChat.html", conver=data)
+
+    if request.method == "POST":
+        mess = request.form["mss"]
+        idConv = mss.getIdConv(session["user_id"], session["TrainerIDGetByUser"])
+        if len(idConv) == 0:
+            mss.createConv(session["user_id"], session["TrainerIDGetByUser"])
+        id__ConV = mss.getIdConv(session["user_id"], session["TrainerIDGetByUser"])
+        mss.insertMessage(mess, id__ConV, 0)
+        return redirect(url_for("chatU"))
+
+
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 # -------------------------------------------------------------
@@ -580,7 +620,9 @@ def seeUserAcount(id, status):
             else:
                 filename = login.readBLOB(usuario)
 
-            return render_template("UserForTrainer.html", data=data, filename=filename, imc=imc)
+            return render_template(
+                "UserForTrainer.html", data=data, filename=filename, imc=imc
+            )
         return render_template(
             "error.html",
             message="Este curso ya ha finalizado, no se puede acceder al perfil",
@@ -719,7 +761,7 @@ def chat():
         id__ConV = mss.getIdConv(
             session["usernameUserFromTrainer"], session["idtrainer"]
         )
-        mss.insertMessage(mess, id__ConV, session["idtrainer"], 1)
+        mss.insertMessage(mess, id__ConV, 1)
         return redirect(url_for("chat"))
 
 
