@@ -565,9 +565,8 @@ def ampl():
 
 @app.route("/trainer/session/course/chat", methods=MethodUtil.list_ALL())
 def chat():
+    mss = Database()
     if request.method == "GET":
-        mss = Database()
-        idm = session["idtrainer"]
         idConv = mss.getIdConv(session["usernameUserFromTrainer"], session["idtrainer"])
         if len(idConv) == 0:
             data = 0
@@ -575,6 +574,17 @@ def chat():
         else:
             data = mss.getConvByIdConv(idConv[0][0])
             return render_template("TrainerChat.html", conver=data)
+
+    if request.method == "POST":
+        mess = request.form["mss"]
+        idConv = mss.getIdConv(session["usernameUserFromTrainer"], session["idtrainer"])
+        if len(idConv) == 0:
+            mss.createConv(session["usernameUserFromTrainer"], session["idtrainer"])
+        id__ConV = mss.getIdConv(
+            session["usernameUserFromTrainer"], session["idtrainer"]
+        )
+        mss.insertMessage(mess, id__ConV, session["idtrainer"], 1)
+        return redirect(url_for("chat"))
 
 
 if __name__ == "__main__":
