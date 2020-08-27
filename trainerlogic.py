@@ -35,6 +35,26 @@ class TrainerLogic(Logic):
         else:
             return None
 
+    def getTrainerDataById(self, trainer):
+        database = self.get_databaseXObj()
+        sql = f"select * from proyectocerberus.trainer where id='{trainer}';"
+        data = database.executeQuery(sql)
+        data = self.tupleToDictionaryList(data, self.keys)
+        if len(data) > 0:
+            data_dic = data[0]
+            trainer = TrainerObj(
+                data_dic["idtrainer"],
+                data_dic["firstname"],
+                data_dic["lastname"],
+                data_dic["username"],
+                data_dic["password"],
+                data_dic["description"],
+                data_dic["email"],
+            )
+            return trainer
+        else:
+            return None
+
     def insertTrainer(self, nombre, apellido, usuario, password, descripcion, email):
         database = self.get_databaseXObj()
         sql = (

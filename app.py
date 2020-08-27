@@ -195,6 +195,16 @@ def courseUser():
         wallet=session["wallet"],
     )
 
+@app.route("/inicio/session/course/trainer/<int:idtrainer>", methods=["GET"])
+def seeTrainerAcount(idtrainer):
+    if request.method == "GET":
+        session["TrainerIDGetByUser"] = idtrainer
+        print(idtrainer)
+        logictrainer = TrainerLogic()
+        data = logictrainer.getTrainerDataById(idtrainer)
+        print(data)
+        return render_template("trainerprofilefromuser.html", data=data)
+        
 
 @app.route(
     "/inicio/session/course/suscription/<string:name>/<string:cost>/<int:idd>",
