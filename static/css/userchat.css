@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.enca{
+    background: rgba(0, 0, 0, .7);
+    overflow: hidden;
+    width: 100%;
+    height: 100px;
+    background-attachment: fixed;
+    margin-bottom: 20px;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    position: fixed;
+}
+.wrapper{
+    width: 90%;
+    max-width: 1180px;
+    margin: auto;
+    overflow: hidden;
+}
+.logo{ 
+    color: #31FF00;
+    font-size: 50px;
+    font-family: 'Alata', sans-serif;
+    line-height: 70px;
+    float: left;
+}
+nav{
+    line-height: 70px;
+    float: right;    
+}
+nav a{
+    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Alata', sans-serif;
+    border-radius: 15px;
+    padding: 20px 10px;
+    line-height: normal;
+    font-size: 20px;
+    -webkit-transition: all 500ms ease;
+    transition: all 500ms ease;
+
+}  
+nav a:hover{
+    color: blue;
+    border-bottom: 5px solid#31FF00;
+}
+body{
+    margin: 0; 
+    padding: 0;
+    background-image: url(../imagenes/azul.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Alata', sans-serif;
+    height: 100vh;
+}
+form {
+    width: 280px;
+    position: absolute;
+    color: #fff;
+    top: 130%;
+    left: 50%;
+    transform: translate(130%, -250%);
+    background: rgba(0, 38, 141, 0.7);
+    box-sizing: border-box;
+    padding: 10px 10px;
+    font-family: 'Alata', sans-serif;
+    border-radius: 20px;
+    text-align: center;
+}
+table{ 
+    background: rgba(0, 0, 0, .7);
+    background-attachment: fixed;
+    width: 1020px;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    cursor: pointer;
+    transform: translate(0%, 30%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+    font-family: 'Alata', sans-serif;
+}
+td{
+    border-bottom: 1px solid rgba(109, 2, 2, 0.5);
+    padding: 2px 2px;
+}
+th{
+    border-bottom: 1px solid rgba(109, 2, 2, 0.5);
+    padding: 2px 2px;
+}
+input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;    
+} 
+input[type="submit"]{
+    border: none; 
+    outline: none;
+    height: 40px;
+    background: #1bcd13;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+input[type="submit"]:hover{
+    cursor: pointer;
+    background: #06b0cb;
+    color: #000;
+}
+a{
+    color: #1bcd13;     
+}

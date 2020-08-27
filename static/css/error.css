@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../imagenes/fondos.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Alata', sans-serif;
+    height: 100vh;
+}
+header{
+    background: rgba(0, 0, 0, .7);
+    height: 150px;
+    background-attachment: fixed;
+}
+
+.logo{
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+    transform: translate(400%, 0);
+}
+h1{
+    color: #1bcd13;
+    font-family: 'Alata', sans-serif;
+    background: rgba(0, 0, 0, .7);
+    text-align: center;
+    width: 350px;
+    border-radius: 15px;
+    transform: translate(500px, 0px);
+}
+h2{
+    color: #1bcd13;
+    font-family: 'Alata', sans-serif;
+    background: rgba(0, 0, 0, .7);
+    text-align: center;
+    width: 650px;
+    border-radius: 10px;
+    transform: translate(352px, 10px);
+}
+input[type="button"]{
+    border: black;
+    outline: none;
+    height: 40px;
+    width: 70px;
+    background: #1bcd13;
+    color: #000;
+    font-size: 18px;
+    border-radius: 20px;
+    transform: translate(640px, 22px);
+}
+input[type="button"]:hover{
+    cursor: pointer;
+    background: #06b0cb;
+    color: #000;
+}
