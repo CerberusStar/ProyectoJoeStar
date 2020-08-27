@@ -27,6 +27,12 @@ class WalletLogic(Logic):
             return wallet
         else:
             return None
+
+    def getAllByID(self, iduser):
+        database = self.get_databaseXObj()
+        sql = f"select * from proyectocerberus.pays where iduser='{iduser}';"
+        data = database.executeQuery(sql)
+        return data
     
     def insertToWallet(self, id, iduser, tarjeta, cvv, month, year, ownercard, date, amount):
         database = self.get_databaseXObj()

@@ -11,6 +11,12 @@
     <br><br>
     <h3>Perfil de {{data.nombre}} {{data.apellido}}</h3>
     <br><br>
+    {% if filename %}
+    <div>
+        <img src="{{ url_for("display_image", filename=filename) }}">
+    </div>
+    {% endif %}
+    <br><br>
     Edad: {{data.edad}}
     <br><br>
     Sexo: {{data.sexo}}

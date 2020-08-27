@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard: user</title>
+</head>
+
+<body>
+    <h1>Tus pagos</h1>
+        <table style="width:50%" border="1">
+        <tr>
+            <th>Dueño</th>
+            <th>Tarjeta</th>
+            <th>Fecha</th>
+            <th>Cantidad abonada</th>
+        </tr>
+        {% for pay in pays %}
+        <tr>
+            <td>{{pay[6]}}</td>
+            <td>{{pay[2]}}</td>
+            <td>{{pay[7]}}</td>
+            <td>{{pay[8]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

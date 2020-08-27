@@ -353,7 +353,12 @@ def payment():
         session["wallet"] = session["adjustedWallet"]
         return redirect(url_for("iniciarsesion"))
 
-
+@app.route("/inicio/session/saldo/tarjetas", methods=MethodUtil.list_ALL())
+def payHistory():
+    if request.method == "GET":
+        entradas = WalletLogic()
+        data = entradas.getAllByID(session["user_id"])
+        return render_template("tablePays.html", pays=data)
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 # -------------------------------------------------------------
@@ -566,7 +571,16 @@ def seeUserAcount(id, status):
             data = logicuser.getUserDataByID(id)
             imc = "{0:.2f}".format(data.peso / (data.altura * data.altura))
             imc = float(imc)
-            return render_template("UserForTrainer.html", data=data, imc=imc)
+            usuario = data.usuario
+            login = UserLogic()
+            nombreCompletoImagen = os.getcwd() + f"\\static\\uploads\\{usuario}.jpg"
+            comprobacion = os.path.exists(nombreCompletoImagen)
+            if comprobacion is True:
+                filename = f"{usuario}.jpg"
+            else:
+                filename = login.readBLOB(usuario)
+
+            return render_template("UserForTrainer.html", data=data, filename=filename, imc=imc)
         return render_template(
             "error.html",
             message="Este curso ya ha finalizado, no se puede acceder al perfil",
