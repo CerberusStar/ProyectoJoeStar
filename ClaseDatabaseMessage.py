@@ -1,4 +1,5 @@
 import mysql.connector
+from datetime import datetime
 
 
 class Database:
@@ -8,6 +9,17 @@ class Database:
         )
         cursor = con.cursor()
         return con, cursor
+
+    def createConv(self, idUser, idtrainer):
+        con, cursor = self.__createCursor()
+        sql = (
+            "insert into proyectocerberus.conversation "
+            + "(c_id, user, trainer, ip, time, status)"
+            + f"values(0, '{idUser}', '{idtrainer}', 1, 1, 1);"
+        )
+        cursor.execute(sql)
+        con.commit()
+        return cursor.rowcount
 
     def getIdConv(self, idUser, idtrainer):
         con, cursor = self.__createCursor()
@@ -22,6 +34,7 @@ class Database:
     def insertMessage(self, message, id_c, iduserFrom, typeU):
         con, cursor = self.__createCursor()
         valueC = int(id_c[0][0])
+
         if typeU == 1:
             statusU = "trainer"
         else:
@@ -47,7 +60,19 @@ class Database:
         data = cursor.fetchall()
         return data
 
+    def getHour(self):
+        now = datetime.now()
+        hour = now.time()
+        print(hour)
+        return hour
+
+    def getDay(self):
+        now = datetime.now()
+        day = now.date()
+        return day
+
 
 datab = Database()
-datab.getIdConv(1, 1)
+datab.getHour()
+datab.getDay()
 

@@ -9,19 +9,30 @@
 
 <body>
     <table style="width:50%" border="1">
+        {%if conver != 0%}
         <tr>
             <th>Me</th>
             <th>You</th>
         </tr>
-        {%if conver != 0%}
+        
         {% for conver in conver %}
         <tr>
-            <th>{{ conver[2] }}</th>
+        {% if conver[7] == "trainer"%}
+            <th>{{ conver[1] }}</th>
+            <th></th>
         </tr>
-        {% endfor %}
-        {% else %}
-            <th> No hay mensajes que mostrar </th>
+        {%else %}
+            <th></th>
+            <th>{{ conver[1] }}</th>
         {% endif %}
+
+        {% endfor %}
+        
+        {% endif %}
+
+     
+   
+        
     </table>
     <form action="/trainer/session/course/chat" method="POST">
         mensaje:
