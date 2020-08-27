@@ -1,16 +1,19 @@
 *{
-    margin: 0; 
-    padding: 0;
-    font-family: 'Alata', sans-serif; 
-}
-body{ 
     margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    margin: 0; 
     padding: 0;
     background-image: url(../imagenes/azul.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     font-family: 'Alata', sans-serif;
+    height: 100vh;
 }
 .enca{
     background: rgba(0, 0, 0, .7);
@@ -31,9 +34,9 @@ body{
 }
 .logo{
     color: #31FF00;
-    font-size: 50px;
+    font-size: 40px;
     font-family: 'Alata', sans-serif;
-    line-height: 120px;
+    line-height: 160px;
     float: left; 
 }
 nav{
@@ -89,14 +92,13 @@ nav a:hover{
 }
 h1{
     background: #000;
-    color: #fff; 
-    width: 550px;
+    color: #fff;
+    width: 550px; 
     height: 50px;
     border-radius: 15px;
     text-align: center;
-    transform: translate(85%, 200%);
+    transform: translate(15%, 100%);
     position: relative;
-    font-size: 30px;
     font-family: 'Alata', sans-serif;
 }
 h2{
@@ -106,57 +108,51 @@ h2{
     height: 50px;
     border-radius: 15px;
     text-align: center;
-    transform: translate(14%, 300%);
+    transform: translate(240%, 330%);
     position: relative;
     font-size: 30px;
     font-family: 'Alata', sans-serif;
-}
+} 
 table{
-    background: rgba(0, 0, 0, .7);
+    background: rgba(0, 0, 12, 0.925);
     background-attachment: fixed;
-    width: 1000px;
+    width: 1150px;
     color: #fff;
     text-align: center;
-    border-radius: 10px;
-    
-    transform: translate(25%, 250%);
+    border-radius: 15px;
+    transform: translate(6%, 100%);
     box-sizing: border-box;
-    padding: 10px 10px;
+    padding: 15px 15px;
+    font-family: 'Alata', sans-serif;
+    align-content: center;
+}
+td{
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    padding: 2px 2px;
+}
+th{
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    padding: 2px 2px;
+
+}
+a{
+    color: #000;
     font-family: 'Alata', sans-serif;
 }
-@media only screen and (min-width:400px) and (max-width:767px){
-    .enca{
-        height: 110px;
 
-    }
-    .logo{
-        font-size: 25px;
-        margin-left: 22px;
-        margin-top: -15px;
-    }
-    nav{
-        margin-top: -20px;
-        transform: translateX(-3%);
-    }
-    h1{
-        font-size: 26px;
-        margin-left: -10px;
-        margin-top: 40px;
-        width: 200px;
-        height: 40px;
-    }
-    h2{
-        font-size: 18px;
-        margin-left: 22px;
-        margin-top: 80px;
-        width: 200px;
-        height: 30px;
-
-    }
-    .clase1{
-        transform: translateX(-3%);
-        font-size: 30px;
-        margin-left: 90px;
-        margin-top: 150px;
-    }
+a{
+    text-decoration: none;
+    color: #31FF00;
+}
+p{
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(37, 82, 0, 0.5);
+    color: #fff;
+    font-family: 'Alata', sans-serif;
+}
+h5{
+    background: #CA0500;
+    border-radius: 10px;
+    padding: 15px 0;
+    font-family: 'Alata', sans-serif;
 }

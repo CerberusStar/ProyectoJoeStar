@@ -36,7 +36,7 @@
     <ul class=flashes>
         {% for message in messages %}
         <li>{{ message }}</li>
-        {% endfor %}
+        {% endfor %} 
     </ul>
     {% endif %}
 
@@ -44,13 +44,14 @@
     </p>
     {% if filename %}
     <div>
-        <img src="{{ url_for("display_image", filename=filename) }}" class="avatar"> 
+        
     </div>
     {% endif %}
  
     <br><br>
-    <h1>Tu rutina</h1>
+    
         <table>
+        <h1>Tu rutina</h1>
         <tr>
             <th>Etapa</th>
             <th>Ejercicio</th>
