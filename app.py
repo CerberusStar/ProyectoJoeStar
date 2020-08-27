@@ -187,7 +187,7 @@ def updateUser():
 def courseUser():
     course = CourseLogic()
     data = course.getAllCoursesAvailableCourses()
-    data2 = course.getAllCoursesUserSuscripted(session["id_user"])
+    data2 = course.getAllCoursesUserSuscripted(session["user_id"])
     return render_template(
         "courseAvailableFromUser.html",
         courses=data,
