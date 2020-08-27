@@ -1,32 +1,39 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard: Trainer</title>
+    <title>Entrenador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashtrainer.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Hola {{userdata}}, es un gusto poder tenerte!</h1>
-    <br><br>
-    
-
-    <a href="/trainer/session/salir"><input type="button" value="Cerrar sesión"></a>
-    <a href="/trainer/session/update"><input type="button" value="modificar mis datos"></a>
-    <br><br>
-    <a href="/trainer/session/course"><input type="button" value="Añadir un curso"></a>
-    <br><br>
-    <h1>Optimizar un problema</h1>
+        <header class="enca">
+            <div class="wrapper">   
+                <div class="logo">
+                    Hola {{userdata}}
+                </div>           
+                <nav> 
+                    <a href="/trainer/session/update">Modificar mis datos</a>
+                    <a href="/trainer/session/course">Añadir un curso</a>
+                    <a href="/trainer/session/salir">Cerrar Sesión</a>
+                </nav>
+            </div>
+        </header>
+  
     <br>
     <form action="/trainer/beforeAmpl" method="POST">
-        Nombre del usuario:
+        <h1>Optimizar un problema</h1>
+        <br>
+        <p>Nombre del usuario</p>
         <input type="text" name="name" id="name" required>
         <br><br>
-        Numero de variables:
+        <p>Numero de variables</p>
         <input type="text" name="var" id="var" required>
         <br><br>
-        Numero de restricciones:
+        <p>Numero de restricciones</p>
         <input type="text" name="restriction" id="restriction" required>
         <br><br>
         <input type="submit">

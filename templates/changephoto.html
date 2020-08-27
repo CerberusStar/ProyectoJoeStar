@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Flask File Upload Example</title>
+    <title>Foto de perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/changephoto.css') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">  
 </head>
 
 <body>
-    <h2>Select a file to upload</h2>
-    <p>
+    </p> 
+
+    <form method="POST" action="/inicio/session/photo" enctype="multipart/form-data">
+        {% if filename %}
+    <div>
+        <img src="{{ url_for("display_image", filename=filename) }}" class="avatar"> 
+    </div>
+    {% endif %}
+    <br>
+    <h2>Selecciona un archivo</h2>
+        <dl>
+            <p>
+                <input type="file" name="file" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+
         {% with messages = get_flashed_messages() %}
 
         {% if messages %}
@@ -21,22 +40,9 @@
     {% endif %}
 
     {% endwith %}
-    </p>
-    {% if filename %}
-    <div>
-        <img src="{{ url_for("display_image", filename=filename) }}">
-    </div>
-    {% endif %}
 
-    <form method="POST" action="/inicio/session/photo" enctype="multipart/form-data">
-        <dl>
-            <p>
-                <input type="file" name="file" autocomplete="off" required>
-            </p>
-        </dl>
-        <p>
-            <input type="submit" value="Submit">
-        </p>
+
+        <br>
         <a href="/inicio/sesion"><input type="button" value="Atrás"></a>
     </form>
 

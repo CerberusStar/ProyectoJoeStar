@@ -4,24 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Actualización de datos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/updatetrainer.css') }}">        
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 </head>
 
 <body>
     <form action="/trainer/session/update" method="POST">
-        Nombre: <br>
+    <img src="{{ url_for('static', filename='imagenes/trainer.png') }}" class="avatar">
+        <h1>Actualización de datos</h1>
+        <br>
+        <p>Nombre</p>
+        <i class="far fa-user icon"></i>
         <input type="text" name="nombre" id="nombre" value="{{nombre1}}" required>
         <br><br>
-        Apellido: <br>
+        <p>Apellido</p>
+        <i class="far fa-user icon"></i>
         <input type="text" name="apellido" id="apellido" value="{{apellido1}}" required>
         <br><br>
-        Contraseña: <br>
+        <p>Contraseña</p>
+        <i class="fas fa-key icon"></i>
         <input type="password" name="password" id="password" value="{{password1}}" required>
         <br><br>
-        Descripcion: <br>
+        <p>Descripción Corta</p>
+        <i class="fas fa-tasks icon"></i>
         <input type="text" name="descripcion" id="descripcion" value="{{descripcion1}}" required>
         <br><br>
-        Email: <br>
+        <p>Email</p>
+        <i class="fas fa-envelope icon"></i>
         <input type="email" name="email" id="email" value="{{email1}}" required>
         <br><br>
         <input type="submit" value="Guardar cambios">

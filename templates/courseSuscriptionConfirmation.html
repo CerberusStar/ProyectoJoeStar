@@ -5,19 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirsuscrip.css') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">  
 </head>
-
 <body>
-    <h1>¿Seguro que quieres suscribirte a este curso?</h1>
-    <h2>{{Name}}</h2>
-    <br><br>
-    <h2>Tu saldo actual: ${{Actual}}</h2>
-    <br>
-    <h2>Costo del curso: ${{Cost}}</h2>
-    <br>
-    <h2>Tu nuevo saldo: ${{Nuevo}}</h2>
-    <br>
     <form action="/inicio/session/course/buy/{{id}}" method="POST">
+            <h1>{{Name}}</h1>
+            <h2>¿Seguro que quieres suscribirte a este curso?</h2>
+            <h3>Tu saldo actual: ${{Actual}}</h3>
+            <h4>Costo del curso: ${{Cost}}</h4>
+            <h5>Tu nuevo saldo: ${{Nuevo}}</h5>
         <input type="submit" value="Comprar">
         <a href="/inicio/session/course"><input type="button" value="Cancelar"></a>
     </form>

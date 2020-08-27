@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Página de inicio o registro del usuario</h1>
+    
     <form method="POST">
+        <img src="{{ url_for('static', filename='imagenes/Logo.png') }}" class="avatar"> 
+        <h1>Bienvenido Usuario</h1><br><br>
 
         <a href="/inicio/loginform"><input type="button" value="Iniciar sesión"></a>
 

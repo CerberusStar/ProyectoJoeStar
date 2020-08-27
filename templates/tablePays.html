@@ -4,12 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard: user</title>
+    <title>Historial de pagos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/coursefromtrainer.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Tus pagos</h1>
-        <table style="width:50%" border="1">
+
+            <header class="enca">
+                <div class="wrapper">   
+                    <div class="logo">
+                        Tus pagos
+                    </div>          
+                        <nav>
+                        <a href="/trainer/sesion">Volver al perfil</a>
+                    </nav>
+                </div>
+            </header>
+
+    
+        <table>
         <tr>
             <th>Dueño</th>
             <th>Tarjeta</th>

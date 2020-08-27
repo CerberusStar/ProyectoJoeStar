@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-</head>
+    <title>Sala de Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/userchat.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+</head> 
 
+<header class="enca"> 
+            <div class="wrapper">   
+                <div class="logo">
+                    <i class="fas fa-comments icon"></i>&nbsp;Sala de Chat
+                </div>           
+                    <nav> 
+                        <a href="/inicio/session/course">Volver a los Cursos</a>
+                    </nav>
+                </div>
+            </header>
+ 
 <body>
-    <table style="width:50%" border="1">
+        <form action="/inicio/session/course/chat" method="POST">
+        mensaje:
+        <input type="text" name="mss" id="idmss" required>
+        <input type="submit" value="Enviar">
+    </form>
+    <table>
         {%if conver != 0%}
         <tr>
-            <th>Me</th>
-            <th>Trainer</th>
+            <th colspan="2">Me</th> 
+            <th colspan="2">Trainer</th>
         </tr>
         
         {% for conver in conver %}
@@ -26,7 +45,7 @@
         {%else %}
             <th></th>
             <th></th>
-            <th>{{ conver[1] }}</th>
+            <th><a>{{ conver[1] }}</a></th>
             <th>{{ conver[3] }}</th>
         {% endif %}
 
@@ -38,12 +57,7 @@
    
         
     </table>
-    <form action="/inicio/session/course/chat" method="POST">
-        mensaje:
-        <input type="text" name="mss" id="idmss" required>
-        <input type="submit" value="Enviar">
-    </form>
-    <a href="/inicio/session/course"><input type="button" value="Volver al perfil"></a>
+
 </body>
 
 </html>

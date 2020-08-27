@@ -5,12 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboard: user</title>
+<!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashuser.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">    
 </head>
 
-<body>
-    <h1>Hola {{userdata}}, es un gusto poder tenerte!</h1>
-    <br><br>
-
+        <header class="enca">
+            <div class="wrapper">   
+                <div class="logo">
+                    Hola {{userdata}}
+                        {% if filename %}
+                        <div>
+                            <img src="{{ url_for("display_image", filename=filename) }}" class="avatar"> 
+                        </div>
+                        {% endif %}
+                </div>           
+                    <nav> 
+                        <a href="/inicio/session/update">Modificar mis datos</a>
+                        <a href="/inicio/session/photo">Cambiar foto</a>
+                        <a href="/inicio/session/course">Cursos</a>
+                        <a href="/inicio/session/saldo/pay">Agregar saldo</a>
+                        <a href="/inicio/session/saldo/tarjetas">Ver historial de pagos</a>
+                        <a href="/inicio/session/salir">Cerrar Sesión</a>
+                    </nav>
+                </div>
+            </header>
+<body>            
+        <h2>Wallet: ${{wallet}}</h2>
     <p>
         {% with messages = get_flashed_messages() %}
 
@@ -26,54 +47,25 @@
     </p>
     {% if filename %}
     <div>
-        <img src="{{ url_for("display_image", filename=filename) }}">
+        <img src="{{ url_for("display_image", filename=filename) }}" class="avatar"> 
     </div>
     {% endif %}
-
-    <table width="280" cellspacing="1" cellpadding="3" border="0" bgcolor="#1E679A">
-        <tr>
-            <td>
-                <font color="#FFFFFF" face="arial, verdana, helvetica">
-                    <b>Wallet:</b>
-                </font>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#ffffcc">
-                <font face="arial, verdana, helvetica">${{wallet}}</font>
-            </td>
-        </tr>
-    </table>
+ 
     <br><br>
-
-    <h1>Tu rutina!</h1>
-        <table style="width:50%" border="1">
-        <tr>
-            <th>Etapa</th>
-            <th>Ejercicio</th>
-            <th>Tiempo</th>
-            <th>Repeticiones</th>
-        </tr>
-        {% for rutina in rutinas %}
-        <tr>
-            <td>{{rutina[4]}}</td>
-            <td>{{rutina[3]}}</td>
-            <td>{{rutina[5]}} minutos</td>
-            <td>{{rutina[6]}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    
-
-    <a href="/inicio/session/salir"><input type="button" value="Cerrar sesión"></a>
-    <a href="/inicio/session/update"><input type="button" value="modificar mis datos"></a>
-    <a href="/inicio/session/course"><input type="button" value="Cursos"></a>
-    <a href="/inicio/session/photo"><input type="button" value="Cambiar foto"></a>
-    <a href="/inicio/session/saldo/pay"><input type="button" value="Ingresar saldo"></a>
-    <a href="/inicio/session/saldo/tarjetas"><input type="button" value="Ver historial de tarjetas"></a>
-
-
-
+    <h1>Tu Rutina</h1>
+        <table class="clase1">
+            {% for rutina in rutinas %}
+                    <tr><th><p>Etapa: {{rutina[4]}}</p></th></tr>
+                    <br>
+                    <tr><th><p>Ejercicio: {{rutina[3]}}</p></th></tr>
+                    <br>
+                    <tr><th><p>Tiempo: {{rutina[5]}} minutos</p></th></tr>   
+                    <br>   
+                    <tr><th><p>Repeticiones: {{rutina[6]}}</p></th></tr>
+                    <br>
+                    <br>
+            {% endfor %}            
+        </table>
 </body>
 
 </html>
