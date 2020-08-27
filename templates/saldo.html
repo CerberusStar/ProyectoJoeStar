@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso Saldo</title>
+</head>
+<body>
+    <form action="/inicio/session/saldo/pay" method="POST">
+        Número de tarjeta: <br>
+        <input type="number" name="tarjeta" id="tarjeta" required>
+        <br><br>
+        CVV: <br>
+        <input type="number" name="cvv" id="cvv" required>
+        <br><br>
+        Mes: <br>
+        <input type="text" name="mes" id="mes" required>
+        <br><br>
+        Año: <br>
+        <input type="text" name="año" id="año" required>
+        <br><br>
+        Nombre: <br>
+        <input type="text" name="nombre" id="año" required>
+        <br><br>
+        Cantidad a Ingresar: <br>
+        <input type="number" name="cantidad" id="cantidad" required>
+        <br><br>
+        <input type="submit" value="Ingresar Saldo">
+        <a href="/inicio/sesion"><input type="button" value="Cancelar"></a>
+    </form>
+</body>
+</html>

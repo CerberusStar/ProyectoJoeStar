@@ -7,10 +7,13 @@ from trainerlogic import TrainerLogic
 from trainerobj import TrainerObj
 from courseObj import CourseObj
 from courseLogic import CourseLogic
+from walletlogic import WalletLogic
+from walletobj import WalletObj
 from rutineLogic import rutineLogic
 from rutineObj import RutineObj
 from werkzeug.security import generate_password_hash, check_password_hash
 from ClaseDatabaseMessage import Database
+import datetime
 
 database = Database()
 codigoampl = Control()
@@ -27,6 +30,7 @@ def index():
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 # -------------------------------------------------------------
+
 @app.route("/inicio", methods=MethodUtil.list_ALL())
 def inicio():
     if request.method == "GET":
@@ -240,6 +244,46 @@ def buyCourse(idcourse):
     actualCourse.buyCourse(idcourse, iduser)
     session["wallet"] = session["adjustedWallet"]
     return redirect(url_for("courseUser"))
+
+@app.route("/inicio/session/saldo/pay", methods=MethodUtil.list_ALL())
+def pay():
+    if request.method == "GET":
+        return render_template("saldo.html")
+    if request.method == "POST":
+        tarjeta = request.form["tarjeta"]
+        cvv = request.form["cvv"]
+        month = request.form["mes"]
+        year = request.form["año"]
+        ownercard = request.form["nombre"]
+        x = datetime.datetime.now()
+        date = x.strftime("%x")
+        amount = request.form["cantidad"]
+        logic = WalletLogic()
+        iduser= session["user_id"]
+        data = logic.insertToWallet(id, iduser, tarjeta, cvv, month, year, ownercard, date, amount)
+        if data is True:
+            session["user_id"] =iduser
+            pay = float(amount)
+            if pay < 0:
+                return render_template("error.html", message="La cantidad ingresada no es valida, intentalo de nuevo")
+            else:
+                actualMoney = session["wallet"]
+                payment = pay + actualMoney
+                session["adjustedWallet"] = payment
+                return render_template("payconfirmation.html", amount = amount, payment = payment)
+        else:
+            return render_template("error.html", message="hubo un error intentelo de nuevo")
+
+@app.route(
+    "/inicio/session/saldo/payment", methods=MethodUtil.list_POSTOnly()
+)
+def payment():
+    if request.method == "POST":
+        iduser = session["user_id"]
+        actualWallet = WalletLogic()
+        actualWallet.updateWallet(iduser)
+        session["wallet"] = session["adjustedWallet"]
+        return redirect(url_for("iniciarsesion"))
 
 
 # -------------------------------------------------------------
