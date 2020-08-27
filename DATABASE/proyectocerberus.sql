@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `proyectocerberus` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `proyectocerberus`;
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: proyectocerberus
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +37,7 @@ CREATE TABLE `conversation` (
   KEY `fk_conversation_trainer1_idx` (`trainer`),
   CONSTRAINT `fk_conversation_trainer1` FOREIGN KEY (`trainer`) REFERENCES `trainer` (`id`),
   CONSTRAINT `foreng_Key_user` FOREIGN KEY (`user`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +46,7 @@ CREATE TABLE `conversation` (
 
 LOCK TABLES `conversation` WRITE;
 /*!40000 ALTER TABLE `conversation` DISABLE KEYS */;
-INSERT INTO `conversation` VALUES (2,4,6,'192.168.0.1',0,1);
+INSERT INTO `conversation` VALUES (2,4,6,'192.168.0.1',0,1),(3,4,4,'1',1,1),(4,3,4,'1',1,1);
 /*!40000 ALTER TABLE `conversation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,20 +60,16 @@ DROP TABLE IF EXISTS `conversation_reply`;
 CREATE TABLE `conversation_reply` (
   `cr_id` int NOT NULL AUTO_INCREMENT,
   `reply` text NOT NULL,
-  `user_trainer_id_fk` int NOT NULL,
   `ip` varchar(45) NOT NULL,
-  `time` int NOT NULL,
+  `time` varchar(12) NOT NULL,
   `status` int NOT NULL,
   `c_id_fk` int NOT NULL,
   `typeUser` varchar(45) NOT NULL,
   PRIMARY KEY (`cr_id`),
   UNIQUE KEY `cr_id_UNIQUE` (`cr_id`),
   KEY `fk_conversation_reply_conversation1_idx` (`c_id_fk`),
-  KEY `fk_conversation_reply_trainer1_idx` (`user_trainer_id_fk`),
-  CONSTRAINT `fk_conversation_reply_conversation1` FOREIGN KEY (`c_id_fk`) REFERENCES `conversation` (`c_id`),
-  CONSTRAINT `fk_conversation_reply_trainer1` FOREIGN KEY (`user_trainer_id_fk`) REFERENCES `trainer` (`id`),
-  CONSTRAINT `fk_conversation_reply_user1` FOREIGN KEY (`user_trainer_id_fk`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_conversation_reply_conversation1` FOREIGN KEY (`c_id_fk`) REFERENCES `conversation` (`c_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +78,7 @@ CREATE TABLE `conversation_reply` (
 
 LOCK TABLES `conversation_reply` WRITE;
 /*!40000 ALTER TABLE `conversation_reply` DISABLE KEYS */;
-INSERT INTO `conversation_reply` VALUES (8,'Hola mundo',4,'192.168.0.1',15556,1,2,'trainer'),(9,'Hola mundo',4,'192.168.0.1',15556,1,2,'trainer'),(10,'Hola mundo',4,'192.168.0.1',15556,1,2,'trainer'),(11,'Hola mundo',4,'192.168.0.1',15556,1,2,'trainer'),(12,'Hola mundo',4,'192.168.0.1',15556,1,2,'trainer');
+INSERT INTO `conversation_reply` VALUES (28,'suave','192.168.0.1','04:19:20',1,4,'user');
 /*!40000 ALTER TABLE `conversation_reply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-26 23:45:03
+-- Dump completed on 2020-08-27  4:28:02

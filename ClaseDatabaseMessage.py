@@ -1,4 +1,5 @@
 import mysql.connector
+from datetime import datetime
 
 
 class Database:
@@ -8,6 +9,17 @@ class Database:
         )
         cursor = con.cursor()
         return con, cursor
+
+    def createConv(self, idUser, idtrainer):
+        con, cursor = self.__createCursor()
+        sql = (
+            "insert into proyectocerberus.conversation "
+            + "(c_id, user, trainer, ip, time, status)"
+            + f"values(0, '{idUser}', '{idtrainer}', 1, 1, 1);"
+        )
+        cursor.execute(sql)
+        con.commit()
+        return cursor.rowcount
 
     def getIdConv(self, idUser, idtrainer):
         con, cursor = self.__createCursor()
@@ -19,18 +31,19 @@ class Database:
         data = cursor.fetchall()
         return data
 
-    def insertMessage(self, message, id_c, iduserFrom, typeU):
+    def insertMessage(self, message, id_c, typeU):
         con, cursor = self.__createCursor()
         valueC = int(id_c[0][0])
+
         if typeU == 1:
             statusU = "trainer"
         else:
             statusU = "user"
-
+        hour = self.getHour()
         sql = (
             "insert into proyectocerberus.conversation_reply"
-            + "(cr_id, reply, user_trainer_id_fk, ip, time, status, c_id_fk, typeUser)"
-            + f"values(0, '{message}', {iduserFrom},'192.168.0.1', '15556', 1, {valueC}, '{statusU}'); "
+            + "(cr_id, reply, ip, time, status, c_id_fk, typeUser)"
+            + f"values(0, '{message}','192.168.0.1', '{hour}', 1, {valueC}, '{statusU}'); "
         )
         cursor.execute(sql)
         con.commit()
@@ -47,7 +60,21 @@ class Database:
         data = cursor.fetchall()
         return data
 
+    def getHour(self):
+        now = datetime.now()
+        hour = now.time()
+        hourStr = str(hour)
+        hour_str = hourStr[0 : len(hourStr) - 7]
+        print(hour_str)
+        return hour_str
+
+    def getDay(self):
+        now = datetime.now()
+        day = now.date()
+        return day
+
 
 datab = Database()
-datab.getIdConv(1, 1)
+datab.getHour()
+datab.getDay()
 
