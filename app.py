@@ -289,11 +289,11 @@ def photo():
                 nombre_nuevo = "static/uploads/"+f"{usuario}.jpg"
                 os.rename(archivo, nombre_nuevo)
                 
-                #nombre = f"{usuario}.jpg"
+                nombre = f"{usuario}.jpg"
 
                 #print(nombre)
                 if confirmation is True:
-                    return render_template("changephoto.html", filename=filename)
+                    return render_template("changephoto.html", filename=nombre)
             else:
                 flash("Allowed image types are -> png, jpg, jpeg, gif")
                 return redirect(request.url)
