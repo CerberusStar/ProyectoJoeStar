@@ -73,8 +73,3 @@ class Database:
         day = now.date()
         return day
 
-
-datab = Database()
-datab.getHour()
-datab.getDay()
-
