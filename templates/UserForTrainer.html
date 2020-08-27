@@ -19,7 +19,11 @@
     <br><br>
     Edad: {{data.edad}}
     <br><br>
-    Sexo: {{data.sexo}}
+    {% if data.sexo == 1 %}
+    Sexo: Hombre
+    {% else %}
+    Sexo: Mujer
+    {% endif %}
     <br><br>
     Peso: {{data.peso}} kilogramos
     <br><br>
