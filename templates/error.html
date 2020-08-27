@@ -4,12 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>error</title>
+    <title>error</title>    
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body> 
+        <header>
+            <img src="{{ url_for('static', filename='imagenes/Logo.png') }}" class="logo">    
+        </header>
+    <br>
     <h1>ERROR</h1>
     <h2>{{message}}</h2>
+    <a href="/user/session/course"><input type="button" value="Aceptar"></a>
 </body>
 
 </html>

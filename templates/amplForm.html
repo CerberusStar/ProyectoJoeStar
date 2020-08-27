@@ -1,28 +1,31 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>AmplForm</title>
+<title>Optimización</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ampl.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 {% endblock head %}
 
 {% block content %}
 <form action="/trainer/ampl" method="POST">
 
     {% for i in range(var) %}
-    Variable {{i+1}}:
+    <p>Variable {{i+1}}</p>
     <input type="text" name="variable{{i}}" id="variable{{i}}" required>
     <br>
-    Precio {{i+1}}:
+    <p>Precio {{i+1}}</p>
     <input type="text" name="precio{{i}}" id="precio{{i}}" required>
     <br><br>
     {% endfor %}
 
-    RESTRICCIONES: <br><br>
+    <h1>RESTRICCIONES</h1>
+    <br><br>
     {% for j in range(restriccion) %}
-    Restricción {{j+1}}:
+    <p>Restricción {{j+1}}</p>
     <input type="text" name="restriction{{j}}" id="restriction{{j}}" required>
     <br><br>
     {% endfor %}
 
-    <input type="submit" value="RUN">
+    <input type="submit" value="Optimizar">
 </form>
 {% endblock content %}

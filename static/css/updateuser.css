@@ -1,0 +1,90 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../imagenes/azul.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: sans-serif;
+    height: 100vh;
+}
+form {
+    width: 580px;
+    position: absolute;
+    color: #fff;
+    top: 130%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.822);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 20px;
+}
+.avatar{
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    top: -299px;
+    left: calc(130% - 123%);
+}
+h1{
+    margin: 0;
+    padding: 0 0 20;
+    text-align: center;
+    font-size: 32px;
+}
+h2{
+    margin: 0;
+    padding: 0 0 20;
+    text-align: center;
+    font-size: 18px;
+    color: red;
+}
+p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1bcd13;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+input[type="submit"]:hover{
+    cursor: pointer;
+    background: #06b0cb;
+    color: #000;
+}
+input[type="button"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background:  #06b0cb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+input[type="button"]:hover{
+    cursor: pointer;
+    background:  #1bcd13;
+    color: #000;
+}
+input{
+    width: 90%;
+    position: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;   
+}

@@ -4,34 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/formtrainer.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" > 
 </head>
 
 <body>
-    <h1>Register form Trainer</h1>
-    <br>
+    <form action="/trainer/registerform" method="POST"> 
+    <img src="{{ url_for('static', filename='imagenes/inicioform.png') }}" class="avatar">  
+        <h1>{{message}}</h1> 
+        <h2>Regístrate</h2>
+        <br>
 
+        <p>Nombre</p>
+        <i class="far fa-user icon"></i>
+        <input type="text" name="nombre" id="nombre" value="{{nombre}}" placeholder="Nombre" required>
+        <br><br>
 
-    <p style="color: red;">{{message}}</p>
-    <form action="/trainer/registerform" method="POST">
-        Nombre: <br>
-        <input type="text" name="nombre" id="nombre" value="{{nombre}}" required>
+        <p>Apellido</p>
+        <i class="far fa-user icon"></i>
+        <input type="text" name="apellido" id="apellido" value="{{apellido}}" placeholder="Apellido" required>
         <br><br>
-        Apellido: <br>
-        <input type="text" name="apellido" id="apellido" value="{{apellido}}" required>
+        <h1>{{message2}}</h1>
+
+        <p>Usuario</p>
+        <i class="fas fa-user icon"></i>
+        <input type="text" name="usuario" id="usuario" value="{{usuario}}" placeholder="Nombre de Usuario" required>
         <br><br>
-        <p style="color: red;">{{message2}}</p>
-        Usuario: <br>
-        <input type="text" name="usuario" id="usuario" value="{{usuario}}" required>
+
+        <p>Contraseña</p>
+        <i class="fas fa-key icon"></i>
+        <input type="password" name="password" id="password" placeholder="Password" required>
         <br><br>
-        Contraseña: <br>
-        <input type="password" name="password" id="password" required>
+
+        <p>Descripcion</p>
+        <i class="fas fa-tasks icon"></i>
+        <input type="text" name="descripcion" id="descripcion" value="{{descripcion}}" placeholder="Descríbete" required>
         <br><br>
-        Descripcion: <br>
-        <input type="text" name="descripcion" id="descripcion" value="{{descripcion}}" required>
-        <br><br>
-        Email: <br>
-        <input type="email" name="email" id="email" value="{{email}}" required>
+
+        <p>Email</p>
+        <i class="fas fa-envelope icon"></i>
+        <input type="email" name="email" id="email" value="{{email}}" placeholder="e-mail" required>
         <br><br>
         <input type="submit" value="Crear Trainer">
         <a href="/trainer"><input type="button" value="Cancelar"></a>

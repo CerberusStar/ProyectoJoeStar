@@ -1,28 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso Saldo</title>
+    
+    <!-- CUSTOM CSS --> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/saldo.css') }}">  
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >  
 </head>
-<body>
+<body> 
     <form action="/inicio/session/saldo/pay" method="POST">
-        Número de tarjeta: <br>
+        <p>Número de tarjeta</p>
+        <i class="fas fa-credit-card icon"></i>
         <input type="text" name="tarjeta" id="tarjeta" required>
         <br><br>
-        CVV: <br>
+        <p>CVV</p>
+        <i class="fas fa-shield-alt icon"></i>
         <input type="number" name="cvv" id="cvv" required>
         <br><br>
-        Mes: <br>
+        <p>Mes</p>
+        <i class="far fa-calendar-alt icon"></i>
         <input type="text" name="mes" id="mes" required>
         <br><br>
-        Año: <br>
+        <p>Año:</p>
+        <i class="far fa-calendar-alt icon"></i>
         <input type="text" name="año" id="año" required>
         <br><br>
-        Nombre: <br>
+        <p>Nombre:</p>
+        <i class="fas fa-user icon"></i>
         <input type="text" name="nombre" id="año" required>
         <br><br>
-        Cantidad a Ingresar: <br>
+        <p>Cantidad a Ingresar</p>
+        <i class="fas fa-dollar-sign icon"></i>
         <input type="number" name="cantidad" id="cantidad" required>
         <br><br>
         <input type="submit" value="Ingresar Saldo">

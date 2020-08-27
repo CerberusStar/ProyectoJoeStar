@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="en"> 
+  
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Entrenador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/trainerprofile.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
-
+<header class="enca"> 
+            <div class="wrapper">   
+                <div class="logo">
+                    Soy tu entrenador 
+                </div>           
+                    <nav> 
+                        <a href="/inicio/session/course">Volver a los Cursos</a>
+                        <a href="/inicio/session/course/chat">Sala de Chat</a>
+                    </nav> 
+                </div>
+            </header> 
+ 
 <body>
+    <form>
+    <img src="{{ url_for('static', filename='imagenes/Logo.png') }}" class="avatar">    
     <br><br>
     <h3>Perfil de {{data.firstname}} {{data.lastname}}</h3>
     <br><br>
     Descripción: {{data.description}}
     <br><br>
-    Email de contacto: {{data.email}}
-    <br><br>
-    <a href="/inicio/session/course"><input type="button" value="Volver a los cursos"></a>
-    <a href="/inicio/session/course/chat"><input type="button" value="Chat"></a>
+    E-mail de contacto: {{data.email}}
+    </form>
 </body>
 </html>

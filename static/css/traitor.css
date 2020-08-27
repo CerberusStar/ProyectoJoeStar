@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../imagenes/fondos.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Alata', sans-serif;
+    height: 100vh;
+}
+header{
+    background: rgba(0, 0, 0, .7);
+    height: 150px;
+    background-attachment: fixed;
+}
+.logo{
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+    transform: translate(400%, 0);
+}
+h1{
+    color: #ff0101;
+    font-family: 'Alata', sans-serif;
+    background: rgba(0, 0, 0, .7);
+    text-align: center;
+    width: 350px;
+    border-radius: 15px;
+    transform: translate(500px, 0px);
+}

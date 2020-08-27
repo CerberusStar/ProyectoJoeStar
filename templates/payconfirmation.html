@@ -1,14 +1,22 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payconfir.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">  
 </head>
 <body>
+        <header>
+            <img src="{{ url_for('static', filename='imagenes/Logo.png') }}" class="logo">    
+        </header>
+        <br>
     <h1>La cantidad que ingresaste a tu billetera es de: ${{amount}}</h1>
+    <br>
     <h1>Tu nuevo saldo es de: ${{payment}}</h1>
     <br>
+   
     <form action="/inicio/session/saldo/payment" method = "POST">
         <input type="submit" value="Actualizar Billetera">   
     </form>

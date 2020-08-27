@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BANNED</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/traitor.css') }}">
 </head>
 
 <body>
+        <header>
+            <img src="{{ url_for('static', filename='imagenes/Logo.png') }}" class="logo">    
+        </header>
+    <br>
     <h1>DON'T DO THAT AGAIN OR YOU WILL BE BANISHED!</h1>
-    <h1 style="font-size:200px">&#129324;</h1>
+    
     <h1>A report has been send to administration. Be carefull, {{user}}</h1>
 </body>
 

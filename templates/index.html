@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Main site</title>
+<title>JoeStar</title>
+<!--CUSTOM CSS-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portada.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,500&display=swap" rel="stylesheet">
 {% endblock head %}
 
 {% block content %}
-<h1>Pagina principal</h1>
-<br>
-<a href="/inicio">USER</a>
-<br>
-<a href="/trainer">TRAINER</a>
+<div class="box-area">
+    <header>
+        <div class="wrapper">
+          <div class="Logo">
+            <a>JoeStar© 2020</a>
+          </div>
+          <nav>
+            <a href="/inicio">User</a>
+            <a href="/trainer">Trainer</a>
+          </nav>
+        </div>
+    </header>
+      <div class="banner-area"
+        <h1></h1>
+      </div>
+    <div class="content-area">
+      <div class="wrapper">
+        <h3>Show the Star how to shane, be the JoeStar</h3>
+        <p>JoeStar, es una aplicación que permite llevar dietas saludables, rutinas de ejercicio personalizadas
+        desde casa y se ajusta a tu presupuesto personal. </p>
+      </div>
+    </div>
+</div>
 {% endblock content %}

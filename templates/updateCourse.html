@@ -4,25 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Curso</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/udcourse.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Editar el curso</h1>
     <form action="/trainer/session/course/update/{{idd}}" method="POST">
-        Nombre del curso:
+    <h1>Editar el curso</h1>
+    <br><br>
+        <p>Nombre del curso</p><br>
         <input type="text" name="name" id="name" value="{{name1}}" required>
         <br><br>
-        Descripción:
+        <p>Descripción</p><br>
         <input type="text" name="desc" id="desc" value="{{desc1}}" required>
         <br><br>
-        Duración:
+        <p>Duración</p><br>
         <input type="text" name="duration" id="duration" value="{{duration1}}" required>
         <br><br>
-        Costo:
+        <p>Costo</p><br>
         <input type="number" name="cost" id="cost" required>
         <br><br>
-        <input type="submit">
+        <input type="submit" value="Editar">
+        <a href="/trainer/session/course"><input type="button" value="Cancelar"></a>
     </form>
 </body>
 

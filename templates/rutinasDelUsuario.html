@@ -5,11 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rutinasuser.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">    
 </head>
-
+<header class="enca">  
+            <div class="wrapper">    
+                <div class="logo">
+                    <h3>Rutinas</h3>
+                </div>           
+                    <nav> 
+                        <a href="/trainer/session/course">Volver a los Cursos</a>
+                        <a href="/trainer/session/course/chat">Sala de Chat</a>                
+                    </nav> 
+                </div>
+            </header> 
 <body>
-    <h1>Rutina del usuario</h1>
-    <table style="width:50%" border="1">
+    <table>
         <tr>
             <th>Etapa</th>
             <th>Ejercicio</th>
@@ -28,24 +39,23 @@
             <td><a href="/trainer/session/rutine/update/{{rutina[0]}}">Actualizar</a></td>
             <td><a href="/trainer/session/rutine/delete/{{rutina[0]}}">Borrar</a></td>
         </tr>
-        {% endfor %}
+        {% endfor %}  
     </table>
-    <br><br>
-    <h1>Agregar nuevo ejercicio a la rutina </h1>
-    <br>
 
-    <p style="color: red;">{{message}}</p>
     <form action="/trainer/session/userAcount/rutine" method="POST">
-        Etapa: <br>
+    <h1>Nuevo Ejercicio </h1>
+    <br>
+    <p style="color: red;">{{message}}</p>
+        <p>Etapa</p>
         <input type="number" name="etapa" id="etapa" required>
         <br><br>
-        Ejercicio: <br>
+        <p>Ejercicio</p>
         <input type="text" name="ejercicio" id="ejercicio" required>
         <br><br>
-        Tiempo (en minutos): <br>
+        <p>Tiempo (en minutos)</p>
         <input type="number" name="time" id="time" required>
         <br><br>
-        Repeticiones: <br>
+        Repeticiones</p>
         <input type="text" name="set" id="set" required>
         <br><br>
         <input type="submit" value="Añadir ejercicio">

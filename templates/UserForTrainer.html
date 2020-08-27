@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
+    <title>Perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/userprofile.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+</head> 
+<header class="enca"> 
+            <div class="wrapper">    
+                <div class="logo">
+                    <h3>Perfil de {{data.nombre}} {{data.apellido}}</h3>
+                </div>           
+                    <nav> 
+                        <a href="/trainer/session/course">Volver a los Cursos</a>
+                        <a href="/trainer/session/course/chat">Sala de Chat</a>
+                        <a href="/trainer/session/userAcount/rutine">Modificar la rutina</a>                 
+                    </nav> 
+                </div>
+            </header> 
 <body>
-    <br><br>
-    <h3>Perfil de {{data.nombre}} {{data.apellido}}</h3>
-    <br><br>
+
+    <form>
     {% if filename %}
     <div>
-        <img src="{{ url_for("display_image", filename=filename) }}">
+        <img src="{{ url_for("display_image", filename=filename) }}" class="avatar">
     </div>
     {% endif %}
     <br><br>
     Edad: {{data.edad}}
     <br><br>
-    {% if data.sexo == 1 %}
+    {% if data.sexo == 1  %}
     Sexo: Hombre
     {% else %}
     Sexo: Mujer
@@ -41,8 +53,6 @@
             {% else %}
             <p>Obesidad</p>
             {% endif %}
-    <a href="/trainer/session/course"><input type="button" value="Volver a los cursos"></a>
-    <a href="/trainer/session/userAcount/rutine"><input type="button" value="Modificar su rutina"></a>
-    <a href="/trainer/session/course/chat"><input type="button" value="Chat"></a>
+    </form>
 </body>
 </html>

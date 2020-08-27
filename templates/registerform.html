@@ -1,49 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro</title>
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/formuser.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >    
 </head>
 
 <body>
-    <h1>Register form</h1>
-    <br>
-
-
-    <p style="color: red;">{{message}}</p>
     <form action="/inicio/registerform" method="POST">
-        Nombre: <br>
-        <input type="text" name="nombre" id="nombre" value="{{nombre}}" required>
+        <img src="{{ url_for('static', filename='imagenes/inicioform.png') }}" class="avatar">    
+
+        <h1>Regístrate</h1>
+        <br>
+        <h2>{{message}}</h2>
+        <p>Nombre</p>
+        <i class="far fa-user icon"></i>
+        <input type="text" name="nombre" id="nombre" value="{{nombre}}" placeholder="Nombre" required>
         <br><br>
-        Apellido: <br>
-        <input type="text" name="apellido" id="apellido" value="{{apellido}}" required>
+        </p>Apellido</p>
+        <i class="far fa-user icon"></i>
+        <input type="text" name="apellido" id="apellido" value="{{apellido}}" placeholder="Apellido" required>
         <br><br>
         <p style="color: red;">{{messageUserExisted}}</p>
-        Usuario: <br>
-        <input type="text" name="usuario" id="usuario" value="{{usuario}}" required>
+
+        <p>Usuario</p>
+        <i class="fas fa-user icon"></i>
+        <input type="text" name="usuario" id="usuario" value="{{usuario}}" placeholder="Usuario" required>
         <br><br>
-        Contraseña: <br>
+        <p>Contraseña</p>
+        <i class="fas fa-key icon"></i>
         <input type="password" name="password" id="password" required>
         <br><br>
-        Email: <br>
-        <input type="email" name="email" id="email" value="{{email}}" required>
+        <p>Email</p>
+        <i class="fas fa-envelope icon"></i>
+        <input type="email" name="email" id="email" value="{{email}}" placeholder="E-mail" required>
         <br><br>
-        Peso (en kilogramos y con dos decimales): <br>
-        <input type="text" name="peso" id="peso" value="{{peso}}" required>
+        <p>Peso (en kilogramos y con dos decimales)</p>
+        <i class="fas fa-weight icon"></i>
+        <input type="text" name="peso" id="peso" value="{{peso}}" placeholder="Ej. 00.00" required>
         <br><br>
-        Edad: <br>
-        <input type="text" name="edad" id="edad" value="{{edad}}" required>
+        <p>Edad</p>
+        <i class="fas fa-user-clock icon"></i>
+        <input type="text" name="edad" id="edad" value="{{edad}}" placeholder="Edad" required>
         <br><br>
-        Sexo: <br>
+        <p>Sexo</p>
+        <br>
+        <label for="male">Masculino</label><br>
+        <i class="fas fa-mars icon"></i>
         <input type="radio" id="male" name="gender" value="male" required>
-        <label for="male">Hombre</label><br>
-        <input type="radio" id="female" name="gender" value="female">
-        <label for="female">Mujer</label><br>
+
+        <label for="female">Femenino</label><br>
+        <i class="fas fa-venus icon"></i>      
+<input type="radio" id="female" name="gender" value="female">
+        
         <br><br>
-        Altura (en metros y con dos decimales): <br>
-        <input type="text" name="altura" id="altura" value="{{altura}}" required>
+        <p>Altura (en metros y con dos decimales)</p>
+        <i class="fas fa-arrows-alt-v icon"></i>
+        <input type="text" name="altura" id="altura" value="{{altura}}" placeholder="Ej. 00.00" required>
         <br><br>
         <input type="submit" value="Crear usuario">
         <a href="/inicio"><input type="button" value="Cancelar"></a>
