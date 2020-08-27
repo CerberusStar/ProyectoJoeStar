@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboard: user</title>
 <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashuser.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >    
+        
 </head>
 
         <header class="enca">
             <div class="wrapper">   
                 <div class="logo">
-                    Hola {{userdata}}
-                        {% if filename %}
-                        <div>
-                            <img src="{{ url_for("display_image", filename=filename) }}" class="avatar"> 
-                        </div>
-                        {% endif %}
+                    <img src="{{ url_for("display_image", filename=filename) }}" class="avatar">{{userdata}}
                 </div>           
                     <nav> 
                         <a href="/inicio/session/update">Modificar mis datos</a>
@@ -31,7 +28,7 @@
                 </div>
             </header>
 <body>            
-        <h2>Wallet: ${{wallet}}</h2>
+        <h2><i class="fas fa-wallet icon"></i>&nbsp;Wallet: ${{wallet}}</h2>
     <p>
         {% with messages = get_flashed_messages() %}
 
@@ -52,20 +49,24 @@
     {% endif %}
  
     <br><br>
-    <h1>Tu Rutina</h1>
-        <table class="clase1">
-            {% for rutina in rutinas %}
-                    <tr><th><p>Etapa: {{rutina[4]}}</p></th></tr>
-                    <br>
-                    <tr><th><p>Ejercicio: {{rutina[3]}}</p></th></tr>
-                    <br>
-                    <tr><th><p>Tiempo: {{rutina[5]}} minutos</p></th></tr>   
-                    <br>   
-                    <tr><th><p>Repeticiones: {{rutina[6]}}</p></th></tr>
-                    <br>
-                    <br>
-            {% endfor %}            
-        </table>
+    <h1>Tu rutina</h1>
+        <table>
+        <tr>
+            <th>Etapa</th>
+            <th>Ejercicio</th>
+            <th>Tiempo</th>
+            <th>Repeticiones</th>
+        </tr>
+        {% for rutina in rutinas %}
+        <tr>
+            <td>{{rutina[4]}}</td>
+            <td>{{rutina[3]}}</td>
+            <td>{{rutina[5]}} minutos</td>
+            <td>{{rutina[6]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
 </body>
 
 </html>
