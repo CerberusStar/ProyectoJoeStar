@@ -11,13 +11,13 @@
     <table style="width:50%" border="1">
         {%if conver != 0%}
         <tr>
-            <th colspan="2">Me</th>
-            <th colspan="2">User</th>
+            <th>Me</th>
+            <th>Trainer</th>
         </tr>
         
         {% for conver in conver %}
         <tr>
-        {% if conver[6] == "trainer"%}
+        {% if conver[6] == "user"%}
             <th>{{ conver[3] }}</th>
             <th>{{ conver[1] }}</th>
             <th></th>
@@ -38,12 +38,12 @@
    
         
     </table>
-    <form action="/trainer/session/course/chat" method="POST">
+    <form action="/inicio/session/course/chat" method="POST">
         mensaje:
         <input type="text" name="mss" id="idmss" required>
         <input type="submit" value="Enviar">
     </form>
-    <a href="/trainer/session/course"><input type="button" value="Volver al perfil"></a>
+    <a href="/inicio/session/course"><input type="button" value="Volver al perfil"></a>
 </body>
 
 </html>

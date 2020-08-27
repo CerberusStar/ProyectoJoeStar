@@ -31,7 +31,7 @@ class Database:
         data = cursor.fetchall()
         return data
 
-    def insertMessage(self, message, id_c, iduserFrom, typeU):
+    def insertMessage(self, message, id_c, typeU):
         con, cursor = self.__createCursor()
         valueC = int(id_c[0][0])
 
@@ -39,11 +39,11 @@ class Database:
             statusU = "trainer"
         else:
             statusU = "user"
-
+        hour = self.getHour()
         sql = (
             "insert into proyectocerberus.conversation_reply"
-            + "(cr_id, reply, user_trainer_id_fk, ip, time, status, c_id_fk, typeUser)"
-            + f"values(0, '{message}', {iduserFrom},'192.168.0.1', '15556', 1, {valueC}, '{statusU}'); "
+            + "(cr_id, reply, ip, time, status, c_id_fk, typeUser)"
+            + f"values(0, '{message}','192.168.0.1', '{hour}', 1, {valueC}, '{statusU}'); "
         )
         cursor.execute(sql)
         con.commit()
@@ -63,8 +63,10 @@ class Database:
     def getHour(self):
         now = datetime.now()
         hour = now.time()
-        print(hour)
-        return hour
+        hourStr = str(hour)
+        hour_str = hourStr[0 : len(hourStr) - 7]
+        print(hour_str)
+        return hour_str
 
     def getDay(self):
         now = datetime.now()
