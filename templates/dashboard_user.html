@@ -11,6 +11,26 @@
     <h1>Hola {{userdata}}, es un gusto poder tenerte!</h1>
     <br><br>
 
+        <h2>Select a file to upload</h2>
+    <p>
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% endwith %}
+    </p>
+    {% if filename %}
+    <div>
+        <img src="{{ url_for("display_image", filename=filename) }}">
+    </div>
+    {% endif %}
+
     <table width="280" cellspacing="1" cellpadding="3" border="0" bgcolor="#1E679A">
         <tr>
             <td>
@@ -49,6 +69,7 @@
     <a href="/inicio/session/salir"><input type="button" value="Cerrar sesión"></a>
     <a href="/inicio/session/update"><input type="button" value="modificar mis datos"></a>
     <a href="/inicio/session/course"><input type="button" value="Cursos"></a>
+    <a href="/inicio/session/photo"><input type="button" value="Cambiar foto"></a>
     <a href="/inicio/session/saldo/pay"><input type="button" value="Ingresar saldo"></a>
 
 

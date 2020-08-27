@@ -14,6 +14,16 @@ from rutineObj import RutineObj
 from werkzeug.security import generate_password_hash, check_password_hash
 from ClaseDatabaseMessage import Database
 import datetime
+import os
+from changephoto import changephoto as changephoto
+import urllib.request
+from flask import Flask, flash, request, redirect, url_for, render_template
+from werkzeug.utils import secure_filename
+from os import remove
+ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
+
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 database = Database()
 codigoampl = Control()
@@ -114,11 +124,22 @@ def iniciarsesion():
     if "username" in session:
         rutine = rutineLogic()
         data = rutine.getAllRutinesFromUser(session["user_id"])
+        
+        usuario = session["username"]
+        login = UserLogic()
+        nombreCompletoImagen = os.getcwd() + f"\\static\\uploads\\{usuario}.jpg"
+        comprobacion = os.path.exists(nombreCompletoImagen)
+        if comprobacion is True:
+            filename = f"{usuario}.jpg"
+        else:
+            filename = login.readBLOB(session["username"])
+
         return render_template(
             "dashboard_user.html",
             userdata=session["username"],
             wallet=session["wallet"],
-            rutinas=data,
+            rutinas = data,
+            filename = filename,
         )
     else:
         return redirect(url_for("inicio"))
@@ -233,6 +254,54 @@ def courseSuscriptionUser(name, cost, idd):
             Nuevo=NewMoney,
             id=idd,
         )
+
+@app.route("/inicio/session/photo", methods=MethodUtil.list_ALL())
+def photo():
+    if "username" in session:
+        if request.method == "GET":
+            return render_template("changephoto.html")
+        if request.method == "POST":
+            print(f"request.files -> {request.files}")
+            usuario = session["username"]
+            if "file" not in request.files:
+                flash("No file part")
+                print(request.url)
+                return redirect(request.url)
+            file = request.files["file"]
+            print(f"file.filename -> {file.filename}")
+            if file.filename == "":
+                flash("No image selected for uploading")
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                comprobacion = os.path.exists("static/uploads/"+f"{usuario}.jpg")
+                if comprobacion is True:
+                    remove("static/uploads/"+f"{usuario}.jpg")
+                file.save(os.path.join(changephoto.config["UPLOAD_FOLDER"], filename))
+                flash("Image successfully uploaded and displayed")
+                print(filename)
+                
+                logic = UserLogic()
+                nombreimagen = os.getcwd() + f"\\static\\uploads\\{filename}"
+                confirmation = logic.insertphotoUser(session["username"],nombreimagen)
+
+                archivo = f"static/uploads/{filename}"
+                nombre_nuevo = "static/uploads/"+f"{usuario}.jpg"
+                os.rename(archivo, nombre_nuevo)
+                
+                #nombre = f"{usuario}.jpg"
+
+                #print(nombre)
+                if confirmation is True:
+                    return render_template("changephoto.html", filename=filename)
+            else:
+                flash("Allowed image types are -> png, jpg, jpeg, gif")
+                return redirect(request.url)
+
+@app.route("/display/<filename>")
+def display_image(filename):
+    return redirect(url_for("static", filename="uploads/" + filename), code=301)
+
 
 
 @app.route(
