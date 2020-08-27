@@ -34,7 +34,7 @@ h1{
     height: 50px;
     border-radius: 15px;
     text-align: center;
-    transform: translate(135%, 15%);
+    transform: translate(15%, 15%);
     position: relative;
     font-family: 'Alata', sans-serif;
 }
@@ -50,31 +50,29 @@ h4{
     font-size: 28px;
     font-family: 'Alata', sans-serif;
 }
-.clase1{
-    background: rgba(0, 0, 0, .7);
+table{
+    background: rgba(0, 0, 12, 0.925);
     background-attachment: fixed;
-    width: 550px;
+    width: 1150px;
     color: #fff;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
     overflow: hidden;
-    transform: translate(135%, -250%);
+    transform: translate(6%, 3%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 30px 30px;
     font-family: 'Alata', sans-serif;
+    align-content: center;
 }
-.clase2{ 
-    background: rgba(2, 113, 121, 0.589);
-    background-attachment: fixed;
-    width: 550px;
-    color: #fff;
-    text-align: center;
-    border-radius: 10px;
-    transform: translate(10%, -25%);
-    box-sizing: border-box;
-    padding: 70px 30px;
-    font-family: 'Alata', sans-serif;
+td{
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    padding: 2px 2px;
+}
+th{
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    padding: 2px 2px;
+
 }
 a{
     color: #000;
@@ -87,9 +85,13 @@ h2{
     font-family: 'Alata', sans-serif;
     color: #000;
 }
+a{
+    text-decoration: none;
+    color: #31FF00;
+}
 p{
     padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    border-bottom: 1px solid rgba(37, 82, 0, 0.5);
     color: #fff;
     font-family: 'Alata', sans-serif;
 }
