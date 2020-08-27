@@ -17,39 +17,49 @@
             <h3><i class="fas fa-wallet icon">&nbsp; &nbsp;</i>Wallet: ${{wallet}}</h3>
         </header>
     <body>
-<h4>Tus Cursos</h4><h1>Cursos disponibles</h1>
-    <table class="clase2">
-        {% for suscription in suscriptions %}
-        <br>
-        <tr><th><h2>{{suscription[1]}}</h2></th></tr>
-            <br>
-                <tr><th><p>Por un costo de ${{suscription[4]}}</p></th></tr>
-                <br>
-                <tr><th><p>{{suscription[2]}}</p></th></tr>
-                <br>
-                <tr><th><p>Duración de {{suscription[3]}}</p></th></tr>   
-                <br>   
-                <tr><th><p><a href="/inicio/session/course/trainer/{{suscription[6]}}">{{suscription[6]}}</a></p></th></tr>
-                <tr><th><p>Estado del curso: {{suscription[7]}}</p></th></tr>
-                <tr><th><p><i class="fas fa-grip-lines icon"></i></p></th></tr>
+
+    <table>
+    <h1>Cursos disponibles</h1>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Duración</th>
+            <th>Costo</th>
+            <th>Entrenador</th> 
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{course[1]}}</td>
+            <td>{{course[2]}}</td>
+            <td>{{course[3]}}</td>
+            <td>${{course[4]}}</td>
+            <td><a>{{course[6]}}</a></td>
+            <td><a href="/inicio/session/course/suscription/{{course[1]}}/{{course[4]}}/{{course[0]}}">Suscribirse</a></td>
+        </tr>
         {% endfor %}
-        <br> 
     </table>
 
-    <table class="clase1">
-        {% for course in courses %}
-            <tr><th><a href="/inicio/session/course/suscription/{{course[1]}}/{{course[4]}}/{{course[0]}}"><h2><i class="fas fa-fist-raised icon">&nbsp; {{course[1]}}</i></h2></th></tr>
-            <br>
-                <tr><th><p>Por un costo de ${{course[4]}}</p></th></tr>
-                <br>
-                <tr><th><p>{{course[2]}}</p></th></tr>
-                <br>
-                <tr><th><p>Duración de {{course[3]}}</p></th></tr>   
-                <br>   
-                <tr><th><p>Guiado por el entrenador: {{course[6]}}</p></th></tr>
-                <tr><th><p><i class="fas fa-grip-lines icon"></i></p></th></tr>
+    <br><br>
+    <table>
+    <h1>Tus cursos</h1>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Duración</th>
+            <th>Costo</th>
+            <th>Entrenador</th>
+            <th>Estado</th>
+        </tr>
+        {% for suscription in suscriptions %}
+        <tr>
+            <td>{{suscription[1]}}</td>
+            <td>{{suscription[2]}}</td>
+            <td>{{suscription[3]}}</td>
+            <td>${{suscription[4]}}</td> 
+            <td><a href="/inicio/session/course/trainer/{{suscription[6]}}">{{suscription[6]}}</a></td>
+            <td>{{suscription[7]}}</td>
+        </tr>
         {% endfor %}
-            <br>
     </table>
 </body>
 </html>
