@@ -279,9 +279,8 @@ def pay():
 )
 def payment():
     if request.method == "POST":
-        iduser = session["user_id"]
         actualWallet = WalletLogic()
-        actualWallet.updateWallet(iduser)
+        actualWallet.updateWallet(session["user_id"], session["adjustedWallet"])
         session["wallet"] = session["adjustedWallet"]
         return redirect(url_for("iniciarsesion"))
 

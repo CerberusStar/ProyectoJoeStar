@@ -37,20 +37,8 @@ class WalletLogic(Logic):
         data = database.executeNonQueryBool(sql)
         return data
 
-    def updateWallet(self, iduser):
+    def updateWallet(self, iduser, wallet):
         database = self.get_databaseXObj()
-        #consigo la cantidad ingresada
-        sqlPay = (f"select amount from proyectocerberus.pays where (iduser = '{iduser}');")
-        paymentData = database.executeQuery(sqlPay)
-        payment = float(paymentData[0][0])
-        # Consigo el dinero actual del usuario
-        sqlgetWallet = (
-            f"select wallet from proyectocerberus.user where (iduser = '{iduser}');"
-        )
-        userWallet = database.executeQuery(sqlgetWallet)
-        userWalletData = float(userWallet[0][0])
-        # actualizo el wallet del user
-        AdjustedWallet = userWalletData + payment
-        sql=(f"UPDATE proyectocerberus.user SET wallet = {AdjustedWallet} WHERE (iduser = '{iduser}');")
+        sql=(f"UPDATE proyectocerberus.user SET wallet = {wallet} WHERE (iduser = '{iduser}');")
         data = database.executeNonQueryBool(sql)
         return data
